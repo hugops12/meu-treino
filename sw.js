@@ -1,4 +1,4 @@
-const CACHE_NAME = "meu-treino-v41";
+const CACHE_NAME = "meu-treino-v6";
 
 const FILES_TO_CACHE = [
 
@@ -18,13 +18,11 @@ const FILES_TO_CACHE = [
 
 ];
 
-
 self.addEventListener(
 
     "install",
 
     event => {
-
 
         event.waitUntil(
 
@@ -38,7 +36,6 @@ self.addEventListener(
 
                 cache => {
 
-
                     return cache.addAll(
 
                         FILES_TO_CACHE
@@ -51,17 +48,17 @@ self.addEventListener(
 
         );
 
+        self.skipWaiting();
+
     }
 
 );
-
 
 self.addEventListener(
 
     "activate",
 
     event => {
-
 
         event.waitUntil(
 
@@ -70,7 +67,6 @@ self.addEventListener(
             .then(
 
                 cacheNames => {
-
 
                     return Promise.all(
 
@@ -106,17 +102,17 @@ self.addEventListener(
 
         );
 
+        self.clients.claim();
+
     }
 
 );
-
 
 self.addEventListener(
 
     "fetch",
 
     event => {
-
 
         event.respondWith(
 
@@ -129,7 +125,6 @@ self.addEventListener(
             .then(
 
                 response => {
-
 
                     return response
 

@@ -1,7 +1,7 @@
 {
     "name": "Meu Treino",
     "short_name": "Meu Treino",
-    "description": "Aplicativo pessoal de treino e progressão de cargas",
+    "description": "Diário de treino, cargas e progressão",
     "start_url": "./",
     "display": "standalone",
     "background_color": "#101010",
