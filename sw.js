@@ -1,4 +1,6 @@
-const CACHE_NAME = "meu-treino-v6";
+const CACHE_NAME =
+    "meu-treino-v6-1";
+
 
 const FILES_TO_CACHE = [
 
@@ -10,13 +12,16 @@ const FILES_TO_CACHE = [
 
     "./sw.js",
 
-    "./splash.png",
+    "./icons/icon-192.png",
 
-    "./icon-192.png",
+    "./icons/icon-512.png",
 
-    "./icon-512.png"
+    "./icons/icon-maskable-512.png",
+
+    "./icons/splash.png"
 
 ];
+
 
 self.addEventListener(
 
@@ -34,25 +39,25 @@ self.addEventListener(
 
             .then(
 
-                cache => {
+                cache =>
 
-                    return cache.addAll(
+                    cache.addAll(
 
                         FILES_TO_CACHE
 
-                    );
-
-                }
+                    )
 
             )
 
         );
+
 
         self.skipWaiting();
 
     }
 
 );
+
 
 self.addEventListener(
 
@@ -66,47 +71,44 @@ self.addEventListener(
 
             .then(
 
-                cacheNames => {
+                keys =>
 
-                    return Promise.all(
+                    Promise.all(
 
-                        cacheNames
+                        keys
 
                         .filter(
 
-                            name =>
+                            key =>
 
-                                name !==
-
+                                key !==
                                 CACHE_NAME
 
                         )
 
                         .map(
 
-                            name =>
+                            key =>
 
                                 caches.delete(
-
-                                    name
-
+                                    key
                                 )
 
                         )
 
-                    );
-
-                }
+                    )
 
             )
 
         );
+
 
         self.clients.claim();
 
     }
 
 );
+
 
 self.addEventListener(
 
@@ -117,24 +119,73 @@ self.addEventListener(
         event.respondWith(
 
             caches.match(
-
                 event.request
-
             )
 
             .then(
 
-                response => {
+                cachedResponse => {
 
-                    return response
+                    if (
+                        cachedResponse
+                    ) {
 
-                        ||
+                        return cachedResponse;
 
-                        fetch(
+                    }
 
-                            event.request
 
-                        );
+                    return fetch(
+                        event.request
+                    )
+
+                    .then(
+
+                        response => {
+
+                            if (
+
+                                !response
+                                ||
+                                response.status !== 200
+                                ||
+                                response.type === "opaque"
+
+                            ) {
+
+                                return response;
+
+                            }
+
+
+                            const cloned =
+                                response.clone();
+
+
+                            caches.open(
+                                CACHE_NAME
+                            )
+
+                            .then(
+
+                                cache =>
+
+                                    cache.put(
+
+                                        event.request,
+
+                                        cloned
+
+                                    )
+
+                            );
+
+
+                            return response;
+
+                        }
+
+                    );
 
                 }
 

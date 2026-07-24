@@ -3,3188 +3,2161 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
 
-<meta name="theme-color" content="#101010">
+    <meta
+        name="theme-color"
+        content="#121212"
+    >
 
-<meta name="description"
-content="Meu Treino - Diário de treino e progressão">
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
 
-<link rel="manifest" href="manifest.json">
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
 
-<title>Meu Treino</title>
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
 
-<style>
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Meu Treino"
+    >
 
-:root {
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
 
-    --bg: #101010;
-    --card: #1d1d1d;
-    --card2: #262626;
-    --border: #353535;
-    --primary: #ff3333;
-    --text: #ffffff;
-    --secondary: #a8a8a8;
-    --success: #35c759;
-    --warning: #ffb000;
+    <link
+        rel="apple-touch-icon"
+        href="icons/icon-192.png"
+    >
 
-}
+    <title>Meu Treino</title>
 
-* {
+    <style>
 
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+        :root {
 
-}
+            --bg:
+                #121212;
 
-html,
-body {
+            --card:
+                #1e1e1e;
 
-    margin: 0;
-    min-height: 100%;
-    background: var(--bg);
+            --card2:
+                #252525;
 
-}
+            --primary:
+                #ff3333;
 
-body {
+            --primary-dark:
+                #c92121;
 
-    padding: 15px;
-    padding-bottom: 90px;
+            --text:
+                #ffffff;
 
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
+            --secondary:
+                #aaaaaa;
 
-    color: var(--text);
+            --border:
+                #333333;
 
-}
+            --success:
+                #35c759;
 
-button,
-input,
-select {
+            --warning:
+                #ffcc00;
 
-    font-family: inherit;
+        }
 
-}
+        * {
 
-button {
+            box-sizing:
+                border-box;
 
-    cursor: pointer;
+        }
 
-}
+        html {
 
-/* =========================
-   SPLASH SCREEN
-========================= */
+            background:
+                var(--bg);
 
-#splashScreen {
+        }
 
-    position: fixed;
-    inset: 0;
+        body {
 
-    z-index: 99999;
+            margin:
+                0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            padding:
+                15px;
 
-    background: #101010;
+            padding-bottom:
+                70px;
 
-    overflow: hidden;
+            background:
+                var(--bg);
 
-    transition:
-        opacity .6s ease,
-        visibility .6s ease;
+            color:
+                var(--text);
 
-}
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
 
-#splashScreen.hidden {
+            min-height:
+                100vh;
 
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+        }
 
-}
+        button,
+        input,
+        select {
 
-#splashScreen img {
+            font:
+                inherit;
 
-    position: absolute;
-    inset: 0;
+        }
 
-    width: 100%;
-    height: 100%;
+        button {
 
-    object-fit: cover;
+            -webkit-tap-highlight-color:
+                transparent;
 
-}
+        }
 
-.splash-overlay {
+        /* =========================
+           SPLASH SCREEN
+        ========================= */
 
-    position: absolute;
-    inset: 0;
+        #splashScreen {
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.2),
-            rgba(0,0,0,.85)
-        );
+            position:
+                fixed;
 
-}
+            inset:
+                0;
 
-.splash-content {
+            z-index:
+                99999;
 
-    position: relative;
-    z-index: 2;
+            display:
+                flex;
 
-    text-align: center;
+            flex-direction:
+                column;
 
-}
+            align-items:
+                center;
 
-.splash-title {
+            justify-content:
+                center;
 
-    font-size: 38px;
-    font-weight: 900;
-    letter-spacing: 2px;
+            background:
+                #121212;
 
-    text-shadow:
-        0 0 15px rgba(255,51,51,.8);
+            transition:
+                opacity 0.4s ease,
+                visibility 0.4s ease;
 
-}
+        }
 
-.splash-subtitle {
+        #splashScreen.hidden {
 
-    margin-top: 8px;
-    color: #ddd;
+            opacity:
+                0;
 
-}
+            visibility:
+                hidden;
 
-.loading-dots {
+            pointer-events:
+                none;
 
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+        }
 
-    margin-top: 25px;
+        .splash-logo {
 
-}
+            width:
+                150px;
 
-.loading-dots span {
+            height:
+                150px;
 
-    width: 9px;
-    height: 9px;
+            object-fit:
+                contain;
 
-    border-radius: 50%;
+            border-radius:
+                30px;
 
-    background: var(--primary);
+            margin-bottom:
+                25px;
 
-    animation:
-        pulse 1.2s infinite ease-in-out;
+            animation:
+                splashPulse 1.5s infinite ease-in-out;
 
-}
+        }
 
-.loading-dots span:nth-child(2) {
+        .splash-title {
 
-    animation-delay: .15s;
+            font-size:
+                25px;
 
-}
+            font-weight:
+                bold;
 
-.loading-dots span:nth-child(3) {
+            color:
+                var(--primary);
 
-    animation-delay: .3s;
+            margin-bottom:
+                25px;
 
-}
+        }
 
-@keyframes pulse {
+        .loader {
 
-    0%,
-    80%,
-    100% {
+            width:
+                45px;
 
-        opacity: .3;
-        transform: scale(.8);
+            height:
+                45px;
 
-    }
+            border:
+                4px solid #333;
 
-    40% {
+            border-top:
+                4px solid var(--primary);
 
-        opacity: 1;
-        transform: scale(1.15);
+            border-radius:
+                50%;
 
-    }
+            animation:
+                spin 0.9s linear infinite;
 
-}
+        }
 
-/* =========================
-   HEADER
-========================= */
+        @keyframes spin {
 
-header {
+            to {
 
-    text-align: center;
-    margin-bottom: 20px;
+                transform:
+                    rotate(360deg);
 
-}
+            }
 
-h1 {
+        }
 
-    margin: 5px 0;
+        @keyframes splashPulse {
 
-    color: var(--primary);
+            0%,
+            100% {
 
-    font-size: 28px;
+                transform:
+                    scale(1);
 
-}
+            }
 
-.subtitle {
+            50% {
 
-    color: var(--secondary);
-    font-size: 13px;
+                transform:
+                    scale(1.05);
 
-}
+            }
 
-.top-controls {
+        }
 
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+        /* =========================
+           HEADER
+        ========================= */
 
-}
+        header {
 
-select {
+            text-align:
+                center;
 
-    flex: 1;
+            margin-bottom:
+                20px;
 
-    padding: 14px;
+        }
 
-    border-radius: 10px;
+        h1 {
 
-    border: 1px solid var(--border);
+            color:
+                var(--primary);
 
-    background: var(--card);
+            font-size:
+                26px;
 
-    color: var(--text);
+            margin:
+                5px 0 4px;
 
-    font-size: 16px;
+        }
 
-    outline: none;
+        .subtitle {
 
-}
+            color:
+                var(--secondary);
 
-.menu-button {
+            font-size:
+                13px;
 
-    width: 50px;
+        }
 
-    border: 1px solid var(--border);
+        select {
 
-    border-radius: 10px;
+            width:
+                100%;
 
-    background: var(--card);
+            padding:
+                14px;
 
-    color: white;
+            border:
+                1px solid var(--border);
 
-    font-size: 22px;
+            border-radius:
+                10px;
 
-}
+            background:
+                var(--card);
 
-/* =========================
-   RESUMO
-========================= */
+            color:
+                var(--text);
 
-.summary {
+            outline:
+                none;
 
-    background: var(--card);
+            margin-bottom:
+                15px;
 
-    border: 1px solid var(--border);
+        }
 
-    border-radius: 14px;
+        /* =========================
+           TOP ACTIONS
+        ========================= */
 
-    padding: 15px;
+        .top-actions {
 
-    margin-bottom: 15px;
+            display:
+                grid;
 
-}
+            grid-template-columns:
+                1fr 1fr;
 
-.summary-top {
+            gap:
+                10px;
 
-    display: flex;
+            margin-bottom:
+                15px;
 
-    justify-content: space-between;
+        }
 
-    align-items: center;
+        .action-btn {
 
-    margin-bottom: 12px;
+            border:
+                none;
 
-}
+            border-radius:
+                10px;
 
-.day-title {
+            padding:
+                12px 8px;
 
-    font-size: 21px;
-    font-weight: bold;
+            color:
+                white;
 
-}
+            background:
+                var(--card2);
 
-.progress-label {
+            border:
+                1px solid var(--border);
 
-    color: var(--secondary);
-    font-size: 13px;
+            cursor:
+                pointer;
 
-}
+            font-size:
+                13px;
 
-.progress-bar {
+        }
 
-    height: 9px;
+        .action-btn:active {
 
-    background: #333;
+            transform:
+                scale(0.97);
 
-    border-radius: 10px;
+        }
 
-    overflow: hidden;
+        /* =========================
+           EXERCISE CARD
+        ========================= */
 
-}
+        #exerciseList {
 
-.progress-fill {
+            list-style:
+                none;
 
-    height: 100%;
+            padding:
+                0;
 
-    width: 0%;
+            margin:
+                0;
 
-    background: var(--success);
+        }
 
-    transition: width .3s ease;
+        .exercise-card {
 
-}
+            background:
+                var(--card);
 
-/* =========================
-   EXERCÍCIOS
-========================= */
+            border:
+                1px solid #2c2c2c;
 
-.exercise-card {
+            border-radius:
+                14px;
 
-    background: var(--card);
+            padding:
+                15px;
 
-    border: 1px solid var(--border);
+            margin-bottom:
+                12px;
 
-    border-radius: 15px;
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.3);
 
-    margin-bottom: 15px;
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease;
 
-    padding: 15px;
+        }
 
-    box-shadow:
-        0 5px 12px rgba(0,0,0,.25);
+        .exercise-card.dragging {
 
-    transition:
-        transform .2s,
-        opacity .2s;
+            opacity:
+                0.45;
 
-}
+            transform:
+                scale(0.98);
 
-.exercise-card.dragging {
+        }
 
-    opacity: .45;
+        .exercise-header {
 
-    transform: scale(.97);
+            display:
+                flex;
 
-    border: 2px dashed var(--primary);
+            align-items:
+                center;
 
-}
+            gap:
+                10px;
 
-.exercise-card.completed {
+        }
 
-    border-color: var(--success);
+        .drag-handle {
 
-}
+            font-size:
+                25px;
 
-.exercise-header {
+            color:
+                var(--secondary);
 
-    display: flex;
+            cursor:
+                grab;
 
-    align-items: center;
+            user-select:
+                none;
 
-    gap: 10px;
+            padding:
+                5px;
 
-    margin-bottom: 14px;
+        }
 
-}
+        .drag-handle:active {
 
-.drag-handle {
+            cursor:
+                grabbing;
 
-    font-size: 23px;
+        }
 
-    color: var(--secondary);
+        .exercise-info {
 
-    cursor: grab;
+            flex:
+                1;
 
-    touch-action: none;
+            min-width:
+                0;
 
-    padding: 8px 4px;
+        }
 
-}
+        .exercise-name {
 
-.drag-handle:active {
+            width:
+                100%;
 
-    cursor: grabbing;
+            color:
+                var(--text);
 
-}
+            background:
+                transparent;
 
-.exercise-info {
+            border:
+                none;
 
-    flex: 1;
-    min-width: 0;
+            outline:
+                none;
 
-}
+            font-size:
+                18px;
 
-.exercise-name,
-.exercise-description {
+            font-weight:
+                bold;
 
-    width: 100%;
+            padding:
+                3px 0;
 
-    border: none;
+        }
 
-    outline: none;
+        .exercise-details {
 
-    background: transparent;
+            width:
+                100%;
 
-    color: var(--text);
+            color:
+                var(--secondary);
 
-}
+            background:
+                transparent;
 
-.exercise-name {
+            border:
+                none;
 
-    font-size: 18px;
-    font-weight: bold;
+            outline:
+                none;
 
-}
+            font-size:
+                14px;
 
-.exercise-description {
+            padding:
+                3px 0;
 
-    color: var(--secondary);
+        }
 
-    font-size: 13px;
+        .exercise-name:focus,
+        .exercise-details:focus {
 
-    margin-top: 5px;
+            border-bottom:
+                1px dashed var(--primary);
 
-}
+        }
 
-.delete-button {
+        .delete-btn {
 
-    border: none;
+            border:
+                none;
 
-    background: transparent;
+            background:
+                transparent;
 
-    color: #ff5555;
+            color:
+                #ff5555;
 
-    font-size: 19px;
+            font-size:
+                20px;
 
-    padding: 5px;
+            cursor:
+                pointer;
 
-}
+            padding:
+                5px;
 
-/* =========================
-   SÉRIES
-========================= */
+        }
 
-.sets-header,
-.set-row {
+        /* =========================
+           CONTROLS
+        ========================= */
 
-    display: grid;
+        .exercise-controls {
 
-    grid-template-columns:
-        40px
-        1fr
-        1fr
-        42px;
+            display:
+                flex;
 
-    gap: 8px;
+            align-items:
+                center;
 
-    align-items: center;
+            justify-content:
+                space-between;
 
-}
+            margin-top:
+                15px;
 
-.sets-header {
+            padding:
+                10px;
 
-    color: var(--secondary);
+            background:
+                var(--card2);
 
-    font-size: 12px;
+            border-radius:
+                10px;
 
-    text-align: center;
+        }
 
-    margin-bottom: 6px;
+        .weight-control {
 
-}
+            display:
+                flex;
 
-.set-row {
+            align-items:
+                center;
 
-    margin-bottom: 8px;
+            gap:
+                8px;
 
-}
+        }
 
-.set-number {
+        .weight-btn {
 
-    text-align: center;
+            width:
+                36px;
 
-    color: var(--secondary);
+            height:
+                36px;
 
-    font-weight: bold;
+            border:
+                none;
 
-}
+            border-radius:
+                8px;
 
-.set-input {
+            background:
+                var(--primary);
 
-    width: 100%;
+            color:
+                white;
 
-    min-width: 0;
+            font-size:
+                21px;
 
-    padding: 10px 5px;
+            font-weight:
+                bold;
 
-    text-align: center;
+            cursor:
+                pointer;
 
-    border-radius: 8px;
+        }
 
-    border: 1px solid var(--border);
+        .weight-btn:active {
 
-    background: var(--card2);
+            background:
+                var(--primary-dark);
 
-    color: white;
+        }
 
-    font-size: 16px;
+        .weight-input {
 
-}
+            width:
+                60px;
 
-.set-checkbox {
+            text-align:
+                center;
 
-    width: 25px;
-    height: 25px;
+            color:
+                white;
 
-    accent-color: var(--success);
+            background:
+                transparent;
 
-}
+            border:
+                none;
 
-/* =========================
-   BOTÕES
-========================= */
+            outline:
+                none;
 
-.exercise-actions {
+            font-size:
+                18px;
 
-    display: flex;
+            font-weight:
+                bold;
 
-    gap: 8px;
+        }
 
-    margin-top: 12px;
+        .unit {
 
-}
+            color:
+                var(--secondary);
 
-.action-button {
+            font-size:
+                14px;
 
-    flex: 1;
+            font-weight:
+                bold;
 
-    padding: 10px;
+        }
 
-    border-radius: 8px;
+        .complete-area {
 
-    border: 1px solid var(--border);
+            display:
+                flex;
 
-    background: var(--card2);
+            align-items:
+                center;
 
-    color: var(--text);
+            gap:
+                8px;
 
-    font-size: 13px;
+            color:
+                var(--secondary);
 
-}
+            font-size:
+                13px;
 
-.action-button.primary {
+        }
 
-    border-color: var(--primary);
+        .complete-checkbox {
 
-    color: var(--primary);
+            width:
+                25px;
 
-}
+            height:
+                25px;
 
-.add-exercise {
+            accent-color:
+                var(--success);
 
-    width: 100%;
+        }
 
-    padding: 15px;
+        /* =========================
+           ADD BUTTON
+        ========================= */
 
-    border-radius: 12px;
+        .add-btn {
 
-    border: 2px dashed var(--primary);
+            width:
+                100%;
 
-    background: transparent;
+            padding:
+                15px;
 
-    color: var(--primary);
+            margin-top:
+                5px;
 
-    font-size: 16px;
+            border:
+                2px dashed var(--primary);
 
-    font-weight: bold;
+            border-radius:
+                12px;
 
-}
+            background:
+                transparent;
 
-/* =========================
-   SUGESTÃO
-========================= */
+            color:
+                var(--primary);
 
-.suggestion {
+            font-weight:
+                bold;
 
-    margin-top: 12px;
+            cursor:
+                pointer;
 
-    padding: 12px;
+        }
 
-    border-radius: 10px;
+        /* =========================
+           PROGRESS SECTION
+        ========================= */
 
-    background:
-        rgba(255,176,0,.1);
+        .progress-section {
 
-    border:
-        1px solid rgba(255,176,0,.35);
+            margin-top:
+                25px;
 
-    color: var(--warning);
+            padding:
+                15px;
 
-    font-size: 13px;
+            background:
+                var(--card);
 
-}
+            border:
+                1px solid #2c2c2c;
 
-/* =========================
-   BARRA INFERIOR
-========================= */
+            border-radius:
+                14px;
 
-.bottom-bar {
+        }
 
-    position: fixed;
+        .progress-section h2 {
 
-    bottom: 0;
-    left: 0;
-    right: 0;
+            margin:
+                0 0 15px;
 
-    z-index: 20;
+            color:
+                var(--primary);
 
-    display: flex;
+            font-size:
+                19px;
 
-    justify-content: space-between;
+        }
 
-    align-items: center;
+        .progress-select {
 
-    padding: 10px 15px;
+            width:
+                100%;
 
-    background: #181818;
+            margin-bottom:
+                15px;
 
-    border-top: 1px solid var(--border);
+        }
 
-}
+        canvas {
 
-.bottom-bar button {
+            width:
+                100%;
 
-    padding: 9px 12px;
+            height:
+                230px;
 
-    border-radius: 8px;
+            background:
+                #181818;
 
-    border: 1px solid var(--border);
+            border-radius:
+                10px;
 
-    background: transparent;
+        }
 
-    color: var(--secondary);
+        .suggestion {
 
-}
+            margin-top:
+                15px;
 
-/* =========================
-   MODAIS
-========================= */
+            padding:
+                12px;
 
-.modal,
-.timer {
+            border-radius:
+                10px;
 
-    position: fixed;
+            background:
+                #292929;
 
-    inset: 0;
+            color:
+                var(--secondary);
 
-    z-index: 90;
+            font-size:
+                14px;
 
-    display: none;
+        }
 
-    align-items: center;
+        .suggestion strong {
 
-    justify-content: center;
+            color:
+                var(--success);
 
-    background:
-        rgba(0,0,0,.85);
+        }
 
-}
+        /* =========================
+           MODAL
+        ========================= */
 
-.modal.active,
-.timer.active {
+        .modal {
 
-    display: flex;
+            position:
+                fixed;
 
-}
+            inset:
+                0;
 
-.modal-box,
-.timer-box {
+            z-index:
+                10000;
 
-    width: 90%;
+            display:
+                none;
 
-    max-width: 400px;
+            align-items:
+                center;
 
-    background: var(--card);
+            justify-content:
+                center;
 
-    border-radius: 15px;
+            padding:
+                20px;
 
-    padding: 20px;
+            background:
+                rgba(0, 0, 0, 0.75);
 
-}
+        }
 
-.modal-box h2 {
+        .modal.active {
 
-    margin-top: 0;
+            display:
+                flex;
 
-}
+        }
 
-.modal-button {
+        .modal-content {
 
-    width: 100%;
+            width:
+                100%;
 
-    padding: 13px;
+            max-width:
+                420px;
 
-    margin-top: 10px;
+            background:
+                var(--card);
 
-    border-radius: 9px;
+            border:
+                1px solid var(--border);
 
-    border: 1px solid var(--border);
+            border-radius:
+                16px;
 
-    background: var(--card2);
+            padding:
+                22px;
 
-    color: white;
+        }
 
-}
+        .modal-content h2 {
 
-/* =========================
-   POPUP DE INSTALAÇÃO
-========================= */
+            color:
+                var(--primary);
 
-.install-popup {
+            margin-top:
+                0;
 
-    position: fixed;
+        }
 
-    left: 15px;
-    right: 15px;
-    bottom: 20px;
+        .modal-content p {
 
-    z-index: 1000;
+            color:
+                var(--secondary);
 
-    max-width: 500px;
+            line-height:
+                1.5;
 
-    margin: auto;
+        }
 
-    padding: 18px;
+        .modal-buttons {
 
-    border-radius: 18px;
+            display:
+                flex;
 
-    background:
-        linear-gradient(
-            145deg,
-            #242424,
-            #171717
-        );
+            gap:
+                10px;
 
-    border: 1px solid #444;
+            margin-top:
+                20px;
 
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.7);
+        }
 
-    transform:
-        translateY(150%);
+        .modal-buttons button {
 
-    opacity: 0;
+            flex:
+                1;
 
-    transition:
-        transform .45s ease,
-        opacity .45s ease;
+            padding:
+                12px;
 
-}
+            border:
+                none;
 
-.install-popup.show {
+            border-radius:
+                9px;
 
-    transform:
-        translateY(0);
+            cursor:
+                pointer;
 
-    opacity: 1;
+        }
 
-}
+        .btn-primary {
 
-.install-header {
+            background:
+                var(--primary);
 
-    display: flex;
+            color:
+                white;
 
-    align-items: center;
+        }
 
-    gap: 12px;
+        .btn-secondary {
 
-}
+            background:
+                #333;
 
-.install-icon {
+            color:
+                white;
 
-    width: 52px;
-    height: 52px;
+        }
 
-    border-radius: 13px;
+        /* =========================
+           TOAST
+        ========================= */
 
-    object-fit: cover;
+        #toast {
 
-}
+            position:
+                fixed;
 
-.install-text {
+            bottom:
+                25px;
 
-    flex: 1;
+            left:
+                50%;
 
-}
+            transform:
+                translateX(-50%) translateY(100px);
 
-.install-title {
+            background:
+                #333;
 
-    font-size: 18px;
+            color:
+                white;
 
-    font-weight: bold;
+            padding:
+                12px 18px;
 
-}
+            border-radius:
+                10px;
 
-.install-description {
+            z-index:
+                999999;
 
-    color: var(--secondary);
+            opacity:
+                0;
 
-    font-size: 13px;
+            transition:
+                0.3s ease;
 
-    margin-top: 4px;
+            font-size:
+                14px;
 
-}
+        }
 
-.install-close {
+        #toast.show {
 
-    border: none;
+            opacity:
+                1;
 
-    background: transparent;
+            transform:
+                translateX(-50%) translateY(0);
 
-    color: var(--secondary);
+        }
 
-    font-size: 22px;
+        .empty {
 
-}
+            text-align:
+                center;
 
-.install-buttons {
+            color:
+                var(--secondary);
 
-    display: flex;
+            padding:
+                25px;
 
-    gap: 10px;
+        }
 
-    margin-top: 15px;
-
-}
-
-.install-buttons button {
-
-    flex: 1;
-
-    padding: 12px;
-
-    border-radius: 9px;
-
-    font-weight: bold;
-
-}
-
-.install-now {
-
-    background: var(--primary);
-
-    border: none;
-
-    color: white;
-
-}
-
-.install-later {
-
-    background: transparent;
-
-    border: 1px solid var(--border);
-
-    color: var(--secondary);
-
-}
-
-/* =========================
-   TIMER
-========================= */
-
-.timer-box {
-
-    text-align: center;
-
-}
-
-.timer-title {
-
-    color: var(--secondary);
-
-}
-
-.timer-value {
-
-    font-size: 58px;
-
-    font-weight: bold;
-
-    color: var(--primary);
-
-    margin: 15px 0;
-
-}
-
-.timer-buttons {
-
-    display: flex;
-
-    gap: 10px;
-
-}
-
-.timer-buttons button {
-
-    flex: 1;
-
-    padding: 12px;
-
-    border-radius: 9px;
-
-    border: none;
-
-    background: var(--primary);
-
-    color: white;
-
-    font-weight: bold;
-
-}
-
-/* =========================
-   GRÁFICO
-========================= */
-
-.chart-container {
-
-    margin-top: 15px;
-
-    background: var(--card2);
-
-    border-radius: 10px;
-
-    padding: 10px;
-
-}
-
-canvas {
-
-    width: 100%;
-
-    height: 220px;
-
-    display: block;
-
-}
-
-.history-info {
-
-    margin-top: 10px;
-
-    color: var(--secondary);
-
-    font-size: 12px;
-
-}
-
-@media (min-width: 700px) {
-
-    body {
-
-        max-width: 700px;
-
-        margin: auto;
-
-    }
-
-    .bottom-bar {
-
-        max-width: 700px;
-
-        margin: auto;
-
-    }
-
-}
-
-</style>
+    </style>
 
 </head>
 
 <body>
 
-<!-- SPLASH -->
+    <!-- SPLASH SCREEN -->
 
-<div id="splashScreen">
+    <div id="splashScreen">
 
-    <img src="splash.png"
-         alt="Meu Treino">
-
-    <div class="splash-overlay"></div>
-
-    <div class="splash-content">
+        <img
+            src="icons/splash.png"
+            class="splash-logo"
+            alt="Meu Treino"
+        >
 
         <div class="splash-title">
 
-            MEU TREINO
+            Meu Treino
 
         </div>
 
-        <div class="splash-subtitle">
+        <div class="loader"></div>
 
-            Seu treino. Sua evolução.
+    </div>
+
+
+    <!-- APP -->
+
+    <header>
+
+        <h1>
+
+            Meus Treinos
+
+        </h1>
+
+        <div class="subtitle">
+
+            Seu treino sempre com você
 
         </div>
 
-        <div class="loading-dots">
+    </header>
 
-            <span></span>
-
-            <span></span>
-
-            <span></span>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- POPUP DE INSTALAÇÃO -->
-
-<div
-    id="installPopup"
-    class="install-popup">
-
-    <div class="install-header">
-
-        <img
-            src="icon-192.png"
-            class="install-icon"
-            alt="Ícone Meu Treino">
-
-        <div class="install-text">
-
-            <div class="install-title">
-
-                Instalar Meu Treino
-
-            </div>
-
-            <div class="install-description">
-
-                Tenha seu treino sempre à mão,
-                mesmo sem internet.
-
-            </div>
-
-        </div>
-
-        <button
-            class="install-close"
-            id="closeInstall">
-
-            ×
-
-        </button>
-
-    </div>
-
-    <div class="install-buttons">
-
-        <button
-            class="install-now"
-            id="installApp">
-
-            📲 Instalar
-
-        </button>
-
-        <button
-            class="install-later"
-            id="installLater">
-
-            Agora não
-
-        </button>
-
-    </div>
-
-</div>
-
-<header>
-
-    <h1>
-
-        Meu Treino
-
-    </h1>
-
-    <div class="subtitle">
-
-        Controle seu treino, cargas e evolução
-
-    </div>
-
-</header>
-
-<div class="top-controls">
 
     <select id="daySelect">
 
         <option value="Segunda-feira">
-
             Segunda-feira
-
         </option>
 
         <option value="Terça-feira">
-
             Terça-feira
-
         </option>
 
         <option value="Quarta-feira">
-
             Quarta-feira
-
         </option>
 
         <option value="Quinta-feira">
-
             Quinta-feira
-
         </option>
 
         <option value="Sexta-feira">
-
             Sexta-feira
-
         </option>
 
     </select>
 
+
+    <div class="top-actions">
+
+        <button
+            class="action-btn"
+            onclick="openProgress()"
+        >
+
+            📈 Progressão
+
+        </button>
+
+        <button
+            class="action-btn"
+            onclick="exportData()"
+        >
+
+            💾 Exportar
+
+        </button>
+
+        <button
+            class="action-btn"
+            onclick="document.getElementById('importFile').click()"
+        >
+
+            📂 Importar
+
+        </button>
+
+        <button
+            class="action-btn"
+            onclick="resetData()"
+        >
+
+            🔄 Restaurar
+
+        </button>
+
+    </div>
+
+
+    <input
+        type="file"
+        id="importFile"
+        accept=".json"
+        hidden
+    >
+
+
+    <ul id="exerciseList"></ul>
+
+
     <button
-        class="menu-button"
-        id="menuButton">
+        class="add-btn"
+        onclick="addExercise()"
+    >
 
-        ⋮
-
-    </button>
-
-</div>
-
-<div class="summary">
-
-    <div class="summary-top">
-
-        <div
-            class="day-title"
-            id="dayTitle">
-
-        </div>
-
-        <div
-            class="progress-label"
-            id="progressLabel">
-
-        </div>
-
-    </div>
-
-    <div class="progress-bar">
-
-        <div
-            class="progress-fill"
-            id="progressFill">
-
-        </div>
-
-    </div>
-
-</div>
-
-<div id="exerciseList"></div>
-
-<button
-    class="add-exercise"
-    id="addExercise">
-
-    + Adicionar Exercício
-
-</button>
-
-<div class="bottom-bar">
-
-    <span id="totalInfo"></span>
-
-    <button id="resetDay">
-
-        Resetar dia
+        + Adicionar Exercício
 
     </button>
 
-</div>
 
-<!-- TIMER -->
+    <!-- PROGRESSÃO -->
 
-<div
-    class="timer"
-    id="timer">
-
-    <div class="timer-box">
-
-        <div class="timer-title">
-
-            Descanso
-
-        </div>
-
-        <div
-            class="timer-value"
-            id="timerValue">
-
-            90
-
-        </div>
-
-        <div class="timer-buttons">
-
-            <button id="startTimer">
-
-                Iniciar
-
-            </button>
-
-            <button id="closeTimer">
-
-                Fechar
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- MENU -->
-
-<div
-    class="modal"
-    id="menuModal">
-
-    <div class="modal-box">
+    <section
+        class="progress-section"
+        id="progressSection"
+        style="display: none;"
+    >
 
         <h2>
 
-            Opções
+            📈 Progressão de Carga
 
         </h2>
 
-        <button
-            class="modal-button"
-            id="exportButton">
 
-            Exportar backup
+        <select
+            class="progress-select"
+            id="progressExercise"
+        >
 
-        </button>
+        </select>
 
-        <button
-            class="modal-button"
-            id="importButton">
 
-            Importar backup
+        <canvas
+            id="progressChart"
+            width="600"
+            height="300"
+        >
 
-        </button>
+        </canvas>
 
-        <input
-            type="file"
-            id="fileInput"
-            accept=".json"
-            hidden>
 
-        <button
-            class="modal-button"
-            id="closeMenu">
+        <div
+            class="suggestion"
+            id="loadSuggestion"
+        >
 
-            Fechar
+        </div>
 
-        </button>
+    </section>
+
+
+    <!-- INSTALL MODAL -->
+
+    <div
+        class="modal"
+        id="installModal"
+    >
+
+        <div class="modal-content">
+
+            <h2>
+
+                📱 Instalar aplicativo?
+
+            </h2>
+
+            <p>
+
+                Instale o Meu Treino no seu celular para acessar seus treinos diretamente pela tela inicial, mesmo como um aplicativo.
+
+            </p>
+
+            <div class="modal-buttons">
+
+                <button
+                    class="btn-secondary"
+                    onclick="closeInstallModal()"
+                >
+
+                    Agora não
+
+                </button>
+
+                <button
+                    class="btn-primary"
+                    onclick="installApp()"
+                >
+
+                    Instalar
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
 
-<script>
+    <div id="toast"></div>
 
-/* =========================
-   INSTALAÇÃO PWA
-========================= */
 
-let deferredPrompt = null;
+    <script>
 
-const installPopup =
-    document.getElementById(
-        "installPopup"
-    );
+        /* =========================
+           DADOS PADRÃO
+        ========================= */
 
-const installButton =
-    document.getElementById(
-        "installApp"
-    );
+        const dbPadrao = {
 
-const installLater =
-    document.getElementById(
-        "installLater"
-    );
+            "Segunda-feira": [
 
-const closeInstall =
-    document.getElementById(
-        "closeInstall"
-    );
+                {
+                    name:
+                        "Supino Reto Halter",
 
-function isStandalone() {
+                    sets:
+                        "4 séries x 6 a 8 repetições",
 
-    return (
+                    weight:
+                        20,
 
-        window.matchMedia(
-            "(display-mode: standalone)"
-        ).matches
+                    history:
+                        []
 
-        ||
+                },
 
-        window.navigator.standalone === true
+                {
+                    name:
+                        "Supino Inclinado Barra",
 
-    );
+                    sets:
+                        "3 séries x 8 a 10 repetições",
 
-}
+                    weight:
+                        12.5,
 
-/*
+                    history:
+                        []
 
-O navegador dispara este evento
-quando o PWA pode ser instalado.
+                },
 
-*/
+                {
+                    name:
+                        "Elevação Lateral Polia",
 
-window.addEventListener(
+                    sets:
+                        "4 séries x 10 a 12 repetições",
 
-    "beforeinstallprompt",
+                    weight:
+                        5,
 
-    event => {
+                    history:
+                        []
 
-        event.preventDefault();
+                },
 
-        deferredPrompt =
-            event;
+                {
+                    name:
+                        "Tríceps Testa Barra W",
 
-        const lastClosed =
-            localStorage.getItem(
-                "installPopupClosed"
+                    sets:
+                        "3 séries x 8 a 10 repetições",
+
+                    weight:
+                        18,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Desenvolvimento Militar Barra",
+
+                    sets:
+                        "4 séries x 6 a 8 repetições",
+
+                    weight:
+                        26,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Tríceps na Polia Coice",
+
+                    sets:
+                        "3 séries x 10 a 12 repetições",
+
+                    weight:
+                        10,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Abdominal Supra Banco Declinado",
+
+                    sets:
+                        "3 séries x 12 a 15 repetições",
+
+                    weight:
+                        0,
+
+                    history:
+                        []
+
+                }
+
+            ],
+
+            "Terça-feira": [
+
+                {
+                    name:
+                        "Graviton",
+
+                    sets:
+                        "4 séries x 10 a 12 repetições",
+
+                    weight:
+                        33,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Remada Curvada com Barra",
+
+                    sets:
+                        "4 séries x 6 a 8 repetições",
+
+                    weight:
+                        46,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Puxada Alta Pegada Aberta",
+
+                    sets:
+                        "3 séries x 8 a 10 repetições",
+
+                    weight:
+                        68,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Face Pull na Polia",
+
+                    sets:
+                        "3 séries x 12 a 15 repetições",
+
+                    weight:
+                        12.5,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Rosca Scott Máquina",
+
+                    sets:
+                        "3 séries x 8 a 10 repetições",
+
+                    weight:
+                        45,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Rosca Inversa na Polia",
+
+                    sets:
+                        "3 séries x 10 a 12 repetições",
+
+                    weight:
+                        12.5,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Abdominal Máquina",
+
+                    sets:
+                        "4 séries x 10 a 12 repetições",
+
+                    weight:
+                        35,
+
+                    history:
+                        []
+
+                }
+
+            ],
+
+            "Quarta-feira": [
+
+                {
+                    name:
+                        "V-Squat",
+
+                    sets:
+                        "4 séries x 6 a 8 repetições",
+
+                    weight:
+                        20,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Cadeira Adutora",
+
+                    sets:
+                        "4 séries x 12 a 15 repetições",
+
+                    weight:
+                        110,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Cadeira Flexora",
+
+                    sets:
+                        "4 séries x 8 a 10 repetições",
+
+                    weight:
+                        68,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Cadeira Extensora",
+
+                    sets:
+                        "3 séries x 10 a 12 repetições",
+
+                    weight:
+                        75,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Panturrilha no Leg Press",
+
+                    sets:
+                        "4 séries x 12 a 15 repetições",
+
+                    weight:
+                        115,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Prancha Frontal com Carga",
+
+                    sets:
+                        "3 séries x 45 a 60 segundos",
+
+                    weight:
+                        0,
+
+                    history:
+                        []
+
+                }
+
+            ],
+
+            "Quinta-feira": [
+
+                {
+                    name:
+                        "Barra Fixa Supinada + Flexão",
+
+                    sets:
+                        "4 séries x Máximo",
+
+                    weight:
+                        0,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Supino Inclinado com Halteres",
+
+                    sets:
+                        "4 séries x 10 a 12 repetições",
+
+                    weight:
+                        20,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Remada Unilateral Máquina",
+
+                    sets:
+                        "3 séries x 10 a 12 repetições",
+
+                    weight:
+                        80,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Desenvolvimento Halteres Uni",
+
+                    sets:
+                        "3 séries x 10 a 12 repetições",
+
+                    weight:
+                        14,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Elevação Lateral + Crucifixo",
+
+                    sets:
+                        "3 séries x 12 repetições",
+
+                    weight:
+                        12,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Rosca Martelo + Tríceps Francês",
+
+                    sets:
+                        "3 séries x 12 a 15 repetições",
+
+                    weight:
+                        16,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Abdominal Máquina",
+
+                    sets:
+                        "4 séries x 10 a 12 repetições",
+
+                    weight:
+                        20,
+
+                    history:
+                        []
+
+                }
+
+            ],
+
+            "Sexta-feira": [
+
+                {
+                    name:
+                        "Cadeira Abdutora",
+
+                    sets:
+                        "4 séries x 12 a 15 repetições",
+
+                    weight:
+                        89,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Afundo com Halteres",
+
+                    sets:
+                        "3 séries x 10 a 12 repetições",
+
+                    weight:
+                        10,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Flexora Unilateral Máquina",
+
+                    sets:
+                        "3 séries x 12 a 15 repetições",
+
+                    weight:
+                        20,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Cadeira Extensora Unilateral",
+
+                    sets:
+                        "3 séries x 12 a 15 repetições",
+
+                    weight:
+                        25,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Panturrilha Sentado",
+
+                    sets:
+                        "4 séries x 15 a 20 repetições",
+
+                    weight:
+                        30,
+
+                    history:
+                        []
+
+                },
+
+                {
+                    name:
+                        "Abdominal Roda",
+
+                    sets:
+                        "3 séries x até a falha",
+
+                    weight:
+                        0,
+
+                    history:
+                        []
+
+                }
+
+            ]
+
+        };
+
+
+        /* =========================
+           CARREGAR BANCO
+        ========================= */
+
+        let db =
+            JSON.parse(
+                localStorage.getItem(
+                    "meuTreinoAppV6"
+                )
+            )
+            ||
+            structuredClone(
+                dbPadrao
             );
 
-        const now =
-            Date.now();
 
-        const sevenDays =
-            7 *
-            24 *
-            60 *
-            60 *
-            1000;
+        let dragStartIndex =
+            null;
 
-        const shouldShow =
 
-            !lastClosed
+        let deferredPrompt =
+            null;
 
-            ||
 
-            now -
-            Number(
-                lastClosed
-            )
-            >
-            sevenDays;
+        /* =========================
+           SEGURANÇA
+        ========================= */
 
-        if (
+        function escapeHTML(text) {
 
-            !isStandalone()
+            return String(text)
 
-            &&
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
 
-            shouldShow
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
 
-        ) {
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================
+           SALVAR
+        ========================= */
+
+        function salvar() {
+
+            localStorage.setItem(
+
+                "meuTreinoAppV6",
+
+                JSON.stringify(
+                    db
+                )
+
+            );
+
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
 
             setTimeout(
 
                 () => {
 
-                    installPopup
-                        .classList
-                        .add(
-                            "show"
-                        );
+                    toast.classList.remove(
+                        "show"
+                    );
 
                 },
 
-                2500
+                2200
 
             );
 
         }
 
-    }
 
-);
+        /* =========================
+           RENDER
+        ========================= */
 
-/*
+        function render() {
 
-Botão Instalar
+            const day =
+                document.getElementById(
+                    "daySelect"
+                ).value;
 
-*/
-
-installButton.addEventListener(
-
-    "click",
-
-    async () => {
-
-        if (
-
-            !deferredPrompt
-
-        ) {
-
-            alert(
-
-                "A instalação ainda não está disponível neste navegador. Use o menu do navegador e escolha 'Adicionar à tela inicial'."
-
-            );
-
-            return;
-
-        }
-
-        deferredPrompt.prompt();
-
-        const choice =
-            await deferredPrompt
-                .userChoice;
-
-        if (
-
-            choice.outcome ===
-            "accepted"
-
-        ) {
-
-            console.log(
-                "Aplicativo instalado"
-            );
-
-        }
-
-        deferredPrompt =
-            null;
-
-        installPopup
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-);
-
-/*
-
-Agora não
-
-*/
-
-installLater.addEventListener(
-
-    "click",
-
-    () => {
-
-        localStorage.setItem(
-
-            "installPopupClosed",
-
-            Date.now()
-
-        );
-
-        installPopup
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-);
-
-/*
-
-Fechar popup
-
-*/
-
-closeInstall.addEventListener(
-
-    "click",
-
-    () => {
-
-        localStorage.setItem(
-
-            "installPopupClosed",
-
-            Date.now()
-
-        );
-
-        installPopup
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-);
-
-/*
-
-Quando o app for instalado,
-o popup desaparece.
-
-*/
-
-window.addEventListener(
-
-    "appinstalled",
-
-    () => {
-
-        installPopup
-            .classList
-            .remove(
-                "show"
-            );
-
-        deferredPrompt =
-            null;
-
-    }
-
-);
-
-/* =========================
-   BANCO DE DADOS
-========================= */
-
-const DB_KEY =
-    "meuTreinoAppV6";
-
-const HISTORY_KEY =
-    "meuTreinoHistoricoV6";
-
-function createExercise(
-
-    name,
-    description,
-    numberOfSets,
-    weight,
-    reps
-
-) {
-
-    return {
-
-        id:
-
-            crypto.randomUUID(),
-
-        name,
-
-        description,
-
-        targetReps:
-
-            reps,
-
-        sets:
-
-            Array.from(
-
-                {
-
-                    length:
-                        numberOfSets
-
-                },
-
-                () => ({
-
-                    weight,
-
-                    reps,
-
-                    done:
-                        false
-
-                })
-
-            )
-
-    };
-
-}
-
-const dbPadrao = {
-
-    "Segunda-feira": [
-
-        createExercise(
-
-            "Supino Reto Halter",
-
-            "Peito",
-
-            4,
-
-            20,
-
-            8
-
-        ),
-
-        createExercise(
-
-            "Supino Inclinado Barra",
-
-            "Peito superior",
-
-            3,
-
-            12.5,
-
-            10
-
-        ),
-
-        createExercise(
-
-            "Elevação Lateral Polia",
-
-            "Ombros",
-
-            4,
-
-            5,
-
-            12
-
-        ),
-
-        createExercise(
-
-            "Tríceps Testa Barra W",
-
-            "Tríceps",
-
-            3,
-
-            18,
-
-            10
-
-        ),
-
-        createExercise(
-
-            "Desenvolvimento Militar Barra",
-
-            "Ombros",
-
-            4,
-
-            26,
-
-            8
-
-        )
-
-    ],
-
-    "Terça-feira": [
-
-        createExercise(
-
-            "Graviton",
-
-            "Costas",
-
-            4,
-
-            33,
-
-            12
-
-        ),
-
-        createExercise(
-
-            "Remada Curvada com Barra",
-
-            "Costas",
-
-            4,
-
-            46,
-
-            8
-
-        ),
-
-        createExercise(
-
-            "Puxada Alta Pegada Aberta",
-
-            "Costas",
-
-            3,
-
-            68,
-
-            10
-
-        ),
-
-        createExercise(
-
-            "Face Pull na Polia",
-
-            "Ombros posteriores",
-
-            3,
-
-            12.5,
-
-            15
-
-        ),
-
-        createExercise(
-
-            "Rosca Scott Máquina",
-
-            "Bíceps",
-
-            3,
-
-            45,
-
-            10
-
-        )
-
-    ],
-
-    "Quarta-feira": [
-
-        createExercise(
-
-            "V-Squat",
-
-            "Quadríceps",
-
-            4,
-
-            20,
-
-            8
-
-        ),
-
-        createExercise(
-
-            "Cadeira Adutora",
-
-            "Adutores",
-
-            4,
-
-            110,
-
-            15
-
-        ),
-
-        createExercise(
-
-            "Cadeira Flexora",
-
-            "Posterior",
-
-            4,
-
-            68,
-
-            10
-
-        ),
-
-        createExercise(
-
-            "Cadeira Extensora",
-
-            "Quadríceps",
-
-            3,
-
-            75,
-
-            12
-
-        ),
-
-        createExercise(
-
-            "Panturrilha no Leg Press",
-
-            "Panturrilhas",
-
-            4,
-
-            115,
-
-            15
-
-        )
-
-    ],
-
-    "Quinta-feira": [
-
-        createExercise(
-
-            "Barra Fixa Supinada + Flexão",
-
-            "Costas e peito",
-
-            4,
-
-            0,
-
-            10
-
-        ),
-
-        createExercise(
-
-            "Supino Inclinado com Halteres",
-
-            "Peito",
-
-            4,
-
-            20,
-
-            12
-
-        ),
-
-        createExercise(
-
-            "Remada Unilateral Máquina",
-
-            "Costas",
-
-            3,
-
-            80,
-
-            12
-
-        ),
-
-        createExercise(
-
-            "Desenvolvimento Halteres Uni",
-
-            "Ombros",
-
-            3,
-
-            14,
-
-            12
-
-        )
-
-    ],
-
-    "Sexta-feira": [
-
-        createExercise(
-
-            "Cadeira Abdutora",
-
-            "Glúteos",
-
-            4,
-
-            89,
-
-            15
-
-        ),
-
-        createExercise(
-
-            "Afundo com Halteres",
-
-            "Pernas",
-
-            3,
-
-            10,
-
-            12
-
-        ),
-
-        createExercise(
-
-            "Flexora Unilateral Máquina",
-
-            "Posterior",
-
-            3,
-
-            20,
-
-            15
-
-        ),
-
-        createExercise(
-
-            "Cadeira Extensora Unilateral",
-
-            "Quadríceps",
-
-            3,
-
-            25,
-
-            15
-
-        ),
-
-        createExercise(
-
-            "Panturrilha Sentado Máquina",
-
-            "Panturrilhas",
-
-            4,
-
-            30,
-
-            20
-
-        )
-
-    ]
-
-};
-
-let db =
-
-    JSON.parse(
-
-        localStorage.getItem(
-            DB_KEY
-        )
-
-    )
-
-    ||
-
-    structuredClone(
-        dbPadrao
-    );
-
-let history =
-
-    JSON.parse(
-
-        localStorage.getItem(
-            HISTORY_KEY
-        )
-
-    )
-
-    ||
-
-    [];
-
-/* =========================
-   ELEMENTOS
-========================= */
-
-const daySelect =
-    document.getElementById(
-        "daySelect"
-    );
-
-const exerciseList =
-    document.getElementById(
-        "exerciseList"
-    );
-
-const dayTitle =
-    document.getElementById(
-        "dayTitle"
-    );
-
-const progressLabel =
-    document.getElementById(
-        "progressLabel"
-    );
-
-const progressFill =
-    document.getElementById(
-        "progressFill"
-    );
-
-const totalInfo =
-    document.getElementById(
-        "totalInfo"
-    );
-
-/* =========================
-   SALVAMENTO
-========================= */
-
-function save() {
-
-    localStorage.setItem(
-
-        DB_KEY,
-
-        JSON.stringify(
-            db
-        )
-
-    );
-
-    localStorage.setItem(
-
-        HISTORY_KEY,
-
-        JSON.stringify(
-            history
-        )
-
-    );
-
-}
-
-/* =========================
-   SUGESTÃO DE CARGA
-========================= */
-
-function getSuggestion(
-    exercise
-) {
-
-    if (
-
-        !exercise.sets.length
-
-    ) {
-
-        return null;
-
-    }
-
-    const lastSet =
-
-        exercise.sets[
-            exercise.sets.length - 1
-        ];
-
-    const target =
-
-        exercise.targetReps
-
-        ||
-
-        lastSet.reps;
-
-    const allCompleted =
-
-        exercise.sets.every(
-
-            set =>
-                set.done
-
-        );
-
-    const reachedTarget =
-
-        exercise.sets.every(
-
-            set =>
-                set.reps >= target
-
-        );
-
-    if (
-
-        allCompleted
-
-        &&
-
-        reachedTarget
-
-    ) {
-
-        const increase =
-
-            lastSet.weight >= 50
-
-                ?
-
-            2.5
-
-                :
-
-            1.25;
-
-        return {
-
-            weight:
-
-                lastSet.weight +
-                increase,
-
-            text:
-
-                "Você atingiu a meta em todas as séries. Aumente progressivamente a carga."
-
-        };
-
-    }
-
-    return {
-
-        weight:
-
-            lastSet.weight,
-
-        text:
-
-            "Mantenha a carga e tente melhorar suas repetições."
-
-    };
-
-}
-
-/* =========================
-   HISTÓRICO
-========================= */
-
-function registerHistory(
-    exercise
-) {
-
-    const completedSets =
-
-        exercise.sets.filter(
-
-            set =>
-                set.done
-
-        );
-
-    if (
-
-        !completedSets.length
-
-    ) {
-
-        return;
-
-    }
-
-    const date =
-
-        new Date()
-
-            .toISOString()
-
-            .split(
-                "T"
-            )[0];
-
-    const maxWeight =
-
-        Math.max(
-
-            ...completedSets.map(
-
-                set =>
-
-                    Number(
-                        set.weight
-                    )
-
-                    ||
-
-                    0
-
-            )
-
-        );
-
-    const totalVolume =
-
-        completedSets.reduce(
-
-            (
-
-                total,
-
-                set
-
-            ) =>
-
-                total +
-
-                (
-
-                    Number(
-                        set.weight
-                    )
-
-                    ||
-
-                    0
-
-                )
-
-                *
-
-                (
-
-                    Number(
-                        set.reps
-                    )
-
-                    ||
-
-                    0
-
-                ),
-
-            0
-
-        );
-
-    const existing =
-
-        history.find(
-
-            item =>
-
-                item.exerciseId ===
-                exercise.id
-
-                &&
-
-                item.date ===
-                date
-
-        );
-
-    if (
-
-        existing
-
-    ) {
-
-        existing.maxWeight =
-            maxWeight;
-
-        existing.totalVolume =
-            totalVolume;
-
-    }
-
-    else {
-
-        history.push({
-
-            exerciseId:
-                exercise.id,
-
-            exerciseName:
-                exercise.name,
-
-            date,
-
-            maxWeight,
-
-            totalVolume
-
-        });
-
-    }
-
-    save();
-
-}
-
-/* =========================
-   GRÁFICO
-========================= */
-
-function showChart(
-    exercise
-) {
-
-    const records =
-
-        history.filter(
-
-            item =>
-
-                item.exerciseId ===
-                exercise.id
-
-        );
-
-    if (
-
-        records.length < 1
-
-    ) {
-
-        alert(
-
-            "Ainda não há histórico suficiente para este exercício."
-
-        );
-
-        return;
-
-    }
-
-    const existing =
-
-        document.querySelector(
-
-            `.chart-container[data-id="${exercise.id}"]`
-
-        );
-
-    if (
-
-        existing
-
-    ) {
-
-        existing.remove();
-
-        return;
-
-    }
-
-    const wrapper =
-
-        document.createElement(
-            "div"
-        );
-
-    wrapper.className =
-        "chart-container";
-
-    wrapper.dataset.id =
-        exercise.id;
-
-    const canvas =
-
-        document.createElement(
-            "canvas"
-        );
-
-    canvas.width =
-        700;
-
-    canvas.height =
-        300;
-
-    wrapper.appendChild(
-        canvas
-    );
-
-    const info =
-
-        document.createElement(
-            "div"
-        );
-
-    info.className =
-        "history-info";
-
-    info.textContent =
-
-        `${records.length} registro(s) de progressão`;
-
-    wrapper.appendChild(
-        info
-    );
-
-    const card =
-
-        document.querySelector(
-
-            `[data-id="${exercise.id}"]`
-
-        );
-
-    card.appendChild(
-        wrapper
-    );
-
-    drawChart(
-        canvas,
-        records
-    );
-
-}
-
-function drawChart(
-    canvas,
-    records
-) {
-
-    const ctx =
-        canvas.getContext(
-            "2d"
-        );
-
-    const width =
-        canvas.width;
-
-    const height =
-        canvas.height;
-
-    ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-    const values =
-
-        records.map(
-
-            item =>
-                item.maxWeight
-
-        );
-
-    const max =
-
-        Math.max(
-            ...values,
-            1
-        );
-
-    const min =
-
-        Math.min(
-            ...values,
-            0
-        );
-
-    const padding =
-        45;
-
-    ctx.strokeStyle =
-        "#555";
-
-    ctx.lineWidth =
-        2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        padding,
-        20
-    );
-
-    ctx.lineTo(
-        padding,
-        height - padding
-    );
-
-    ctx.lineTo(
-        width - 20,
-        height - padding
-    );
-
-    ctx.stroke();
-
-    ctx.strokeStyle =
-        "#ff3333";
-
-    ctx.lineWidth =
-        5;
-
-    ctx.beginPath();
-
-    values.forEach(
-
-        (
-
-            value,
-
-            index
-
-        ) => {
-
-            const x =
-
-                padding +
-
-                (
-
-                    index /
-
-                    Math.max(
-
-                        values.length - 1,
-
-                        1
-
-                    )
-
-                )
-
-                *
-
-                (
-
-                    width -
-                    padding -
-                    30
-
+            const list =
+                document.getElementById(
+                    "exerciseList"
                 );
 
-            const y =
-
-                height -
-                padding -
-
-                (
-
-                    (
-
-                        value -
-                        min
-
-                    )
-
-                    /
-
-                    Math.max(
-
-                        max -
-                        min,
-
-                        1
-
-                    )
-
-                )
-
-                *
-
-                (
-
-                    height -
-                    padding -
-                    40
-
-                );
+            list.innerHTML =
+                "";
 
             if (
-
-                index === 0
-
+                !db[day]
+                ||
+                db[day].length === 0
             ) {
 
-                ctx.moveTo(
-                    x,
-                    y
-                );
+                list.innerHTML = `
 
-            }
+                    <div class="empty">
 
-            else {
-
-                ctx.lineTo(
-                    x,
-                    y
-                );
-
-            }
-
-        }
-
-    );
-
-    ctx.stroke();
-
-    values.forEach(
-
-        (
-
-            value,
-
-            index
-
-        ) => {
-
-            const x =
-
-                padding +
-
-                (
-
-                    index /
-
-                    Math.max(
-
-                        values.length - 1,
-
-                        1
-
-                    )
-
-                )
-
-                *
-
-                (
-
-                    width -
-                    padding -
-                    30
-
-                );
-
-            const y =
-
-                height -
-                padding -
-
-                (
-
-                    (
-
-                        value -
-                        min
-
-                    )
-
-                    /
-
-                    Math.max(
-
-                        max -
-                        min,
-
-                        1
-
-                    )
-
-                )
-
-                *
-
-                (
-
-                    height -
-                    padding -
-                    40
-
-                );
-
-            ctx.fillStyle =
-                "#ff3333";
-
-            ctx.beginPath();
-
-            ctx.arc(
-
-                x,
-                y,
-                7,
-                0,
-                Math.PI * 2
-
-            );
-
-            ctx.fill();
-
-            ctx.fillStyle =
-                "#ffffff";
-
-            ctx.font =
-                "18px Arial";
-
-            ctx.fillText(
-
-                value + " kg",
-
-                x - 20,
-
-                y - 15
-
-            );
-
-        }
-
-    );
-
-}
-
-/* =========================
-   RENDER
-========================= */
-
-function render() {
-
-    const day =
-        daySelect.value;
-
-    const exercises =
-        db[day];
-
-    exerciseList.innerHTML =
-        "";
-
-    dayTitle.textContent =
-        day;
-
-    let totalSets =
-        0;
-
-    let completedSets =
-        0;
-
-    exercises.forEach(
-
-        exercise => {
-
-            totalSets +=
-                exercise.sets.length;
-
-            completedSets +=
-
-                exercise.sets.filter(
-
-                    set =>
-                        set.done
-
-                ).length;
-
-        }
-
-    );
-
-    const percentage =
-
-        totalSets === 0
-
-            ?
-
-        0
-
-            :
-
-        Math.round(
-
-            completedSets /
-            totalSets *
-            100
-
-        );
-
-    progressLabel.textContent =
-
-        `${completedSets}/${totalSets} séries`;
-
-    progressFill.style.width =
-
-        `${percentage}%`;
-
-    totalInfo.textContent =
-
-        `${percentage}% concluído`;
-
-    exercises.forEach(
-
-        (
-
-            exercise,
-
-            exerciseIndex
-
-        ) => {
-
-            const card =
-
-                document.createElement(
-                    "div"
-                );
-
-            card.className =
-                "exercise-card";
-
-            card.dataset.id =
-                exercise.id;
-
-            card.dataset.index =
-                exerciseIndex;
-
-            const allDone =
-
-                exercise.sets.length > 0
-
-                &&
-
-                exercise.sets.every(
-
-                    set =>
-                        set.done
-
-                );
-
-            if (
-
-                allDone
-
-            ) {
-
-                card.classList.add(
-                    "completed"
-                );
-
-            }
-
-            const suggestion =
-
-                getSuggestion(
-                    exercise
-                );
-
-            card.innerHTML = `
-
-                <div class="exercise-header">
-
-                    <span class="drag-handle">
-
-                        ☰
-
-                    </span>
-
-                    <div class="exercise-info">
-
-                        <input
-
-                            class="exercise-name"
-
-                            value="${escapeHTML(
-
-                                exercise.name
-
-                            )}">
-
-                        <input
-
-                            class="exercise-description"
-
-                            value="${escapeHTML(
-
-                                exercise.description ||
-                                ""
-
-                            )}">
+                        Nenhum exercício cadastrado.
 
                     </div>
 
-                    <button
+                `;
 
-                        class="delete-button">
+                return;
 
-                        🗑
+            }
 
-                    </button>
 
-                </div>
+            db[day].forEach(
 
-                <div class="sets-header">
+                (ex, index) => {
 
-                    <span>Série</span>
+                    if (
+                        !ex.history
+                    ) {
 
-                    <span>Carga kg</span>
+                        ex.history =
+                            [];
 
-                    <span>Reps</span>
+                    }
 
-                    <span>✓</span>
 
-                </div>
-
-                <div class="sets-container">
-
-                </div>
-
-                ${
-
-                    suggestion
-
-                        ?
-
-                    `
-
-                    <div class="suggestion">
-
-                        💡 Próximo treino:
-
-                        <strong>
-
-                            ${suggestion.weight} kg
-
-                        </strong>
-
-                        <br>
-
-                        ${suggestion.text}
-
-                    </div>
-
-                    `
-
-                        :
-
-                    ""
-
-                }
-
-                <div class="exercise-actions">
-
-                    <button
-
-                        class="action-button primary add-set">
-
-                        + Série
-
-                    </button>
-
-                    <button
-
-                        class="action-button chart-button">
-
-                        📈 Progressão
-
-                    </button>
-
-                    <button
-
-                        class="action-button rest-button">
-
-                        ⏱ Descanso
-
-                    </button>
-
-                </div>
-
-            `;
-
-            const nameInput =
-
-                card.querySelector(
-
-                    ".exercise-name"
-
-                );
-
-            const descriptionInput =
-
-                card.querySelector(
-
-                    ".exercise-description"
-
-                );
-
-            nameInput.addEventListener(
-
-                "change",
-
-                () => {
-
-                    exercise.name =
-                        nameInput.value;
-
-                    save();
-
-                }
-
-            );
-
-            descriptionInput.addEventListener(
-
-                "change",
-
-                () => {
-
-                    exercise.description =
-                        descriptionInput.value;
-
-                    save();
-
-                }
-
-            );
-
-            const setsContainer =
-
-                card.querySelector(
-
-                    ".sets-container"
-
-                );
-
-            exercise.sets.forEach(
-
-                (
-
-                    set,
-
-                    setIndex
-
-                ) => {
-
-                    const row =
-
+                    const li =
                         document.createElement(
-                            "div"
+                            "li"
                         );
 
-                    row.className =
-                        "set-row";
+                    li.className =
+                        "exercise-card";
 
-                    row.innerHTML = `
+                    li.dataset.index =
+                        index;
 
-                        <span class="set-number">
 
-                            ${setIndex + 1}
+                    li.innerHTML = `
 
-                        </span>
+                        <div class="exercise-header">
 
-                        <input
+                            <span
+                                class="drag-handle"
+                                title="Arraste para mudar a posição"
+                            >
 
-                            class="set-input weight"
+                                ☰
 
-                            type="number"
+                            </span>
 
-                            step="0.5"
 
-                            value="${set.weight}">
+                            <div class="exercise-info">
 
-                        <input
+                                <input
+                                    class="exercise-name"
+                                    value="${escapeHTML(ex.name)}"
+                                    aria-label="Nome do exercício"
+                                >
 
-                            class="set-input reps"
+                                <input
+                                    class="exercise-details"
+                                    value="${escapeHTML(ex.sets)}"
+                                    aria-label="Séries e repetições"
+                                >
 
-                            type="number"
+                            </div>
 
-                            value="${set.reps}">
 
-                        <input
+                            <button
+                                class="delete-btn"
+                                title="Excluir exercício"
+                            >
 
-                            class="set-checkbox"
+                                🗑️
 
-                            type="checkbox"
+                            </button>
 
-                            ${
-                                set.done
+                        </div>
 
-                                    ?
 
-                                "checked"
+                        <div class="exercise-controls">
 
-                                    :
+                            <div class="weight-control">
 
-                                ""
+                                <button
+                                    class="weight-btn minus"
+                                >
 
-                            }>
+                                    −
+
+                                </button>
+
+
+                                <input
+                                    type="number"
+                                    class="weight-input"
+                                    value="${ex.weight}"
+                                    step="0.5"
+                                >
+
+
+                                <span class="unit">
+
+                                    kg
+
+                                </span>
+
+
+                                <button
+                                    class="weight-btn plus"
+                                >
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+
+                            <label class="complete-area">
+
+                                <input
+                                    type="checkbox"
+                                    class="complete-checkbox"
+                                >
+
+                                Feito
+
+                            </label>
+
+                        </div>
 
                     `;
 
+
+                    const nameInput =
+                        li.querySelector(
+                            ".exercise-name"
+                        );
+
+                    const detailsInput =
+                        li.querySelector(
+                            ".exercise-details"
+                        );
+
                     const weightInput =
-
-                        row.querySelector(
-                            ".weight"
+                        li.querySelector(
+                            ".weight-input"
                         );
 
-                    const repsInput =
-
-                        row.querySelector(
-                            ".reps"
+                    const deleteBtn =
+                        li.querySelector(
+                            ".delete-btn"
                         );
 
-                    const checkbox =
-
-                        row.querySelector(
-                            ".set-checkbox"
+                    const minusBtn =
+                        li.querySelector(
+                            ".minus"
                         );
+
+                    const plusBtn =
+                        li.querySelector(
+                            ".plus"
+                        );
+
+
+                    nameInput.addEventListener(
+
+                        "change",
+
+                        () => {
+
+                            db[day][index].name =
+                                nameInput.value;
+
+                            salvar();
+
+                        }
+
+                    );
+
+
+                    detailsInput.addEventListener(
+
+                        "change",
+
+                        () => {
+
+                            db[day][index].sets =
+                                detailsInput.value;
+
+                            salvar();
+
+                        }
+
+                    );
+
 
                     weightInput.addEventListener(
 
@@ -3192,62 +2165,32 @@ function render() {
 
                         () => {
 
-                            set.weight =
-
-                                Number(
-
+                            let value =
+                                parseFloat(
                                     weightInput.value
+                                );
 
-                                )
-
+                            if (
+                                isNaN(value)
                                 ||
+                                value < 0
+                            ) {
 
-                                0;
+                                value =
+                                    0;
 
-                            save();
+                            }
 
-                        }
+                            db[day][index].weight =
+                                value;
 
-                    );
-
-                    repsInput.addEventListener(
-
-                        "change",
-
-                        () => {
-
-                            set.reps =
-
-                                Number(
-
-                                    repsInput.value
-
-                                )
-
-                                ||
-
-                                0;
-
-                            save();
-
-                        }
-
-                    );
-
-                    checkbox.addEventListener(
-
-                        "change",
-
-                        () => {
-
-                            set.done =
-                                checkbox.checked;
-
-                            registerHistory(
-                                exercise
+                            registrarCarga(
+                                day,
+                                index,
+                                value
                             );
 
-                            save();
+                            salvar();
 
                             render();
 
@@ -3255,712 +2198,910 @@ function render() {
 
                     );
 
-                    setsContainer.appendChild(
-                        row
+
+                    minusBtn.addEventListener(
+
+                        "click",
+
+                        () => {
+
+                            changeWeight(
+                                day,
+                                index,
+                                -1
+                            );
+
+                        }
+
                     );
 
-                }
 
-            );
+                    plusBtn.addEventListener(
 
-            card.querySelector(
-                ".add-set"
-            ).addEventListener(
+                        "click",
 
-                "click",
+                        () => {
 
-                () => {
+                            changeWeight(
+                                day,
+                                index,
+                                1
+                            );
 
-                    const lastSet =
+                        }
 
-                        exercise.sets[
-
-                            exercise.sets.length -
-                            1
-
-                        ];
-
-                    exercise.sets.push({
-
-                        weight:
-
-                            lastSet
-
-                                ?
-
-                            lastSet.weight
-
-                                :
-
-                            0,
-
-                        reps:
-
-                            lastSet
-
-                                ?
-
-                            lastSet.reps
-
-                                :
-
-                            10,
-
-                        done:
-                            false
-
-                    });
-
-                    save();
-
-                    render();
-
-                }
-
-            );
-
-            card.querySelector(
-                ".chart-button"
-            ).addEventListener(
-
-                "click",
-
-                () => {
-
-                    showChart(
-                        exercise
                     );
 
-                }
 
-            );
+                    deleteBtn.addEventListener(
 
-            card.querySelector(
-                ".rest-button"
-            ).addEventListener(
+                        "click",
 
-                "click",
+                        () => {
 
-                openTimer
+                            deleteExercise(
+                                day,
+                                index
+                            );
 
-            );
+                        }
 
-            card.querySelector(
-                ".delete-button"
-            ).addEventListener(
+                    );
 
-                "click",
 
-                () => {
-
-                    if (
-
-                        confirm(
-
-                            "Excluir este exercício?"
-
-                        )
-
-                    ) {
-
-                        exercises.splice(
-
-                            exerciseIndex,
-
-                            1
-
+                    const handle =
+                        li.querySelector(
+                            ".drag-handle"
                         );
 
-                        save();
 
-                        render();
+                    handle.addEventListener(
 
-                    }
+                        "pointerdown",
+
+                        () => {
+
+                            li.draggable =
+                                true;
+
+                        }
+
+                    );
+
+
+                    li.addEventListener(
+
+                        "dragstart",
+
+                        dragStart
+
+                    );
+
+
+                    li.addEventListener(
+
+                        "dragover",
+
+                        dragOver
+
+                    );
+
+
+                    li.addEventListener(
+
+                        "drop",
+
+                        dragDrop
+
+                    );
+
+
+                    li.addEventListener(
+
+                        "dragend",
+
+                        () => {
+
+                            li.draggable =
+                                false;
+
+                            li.classList.remove(
+                                "dragging"
+                            );
+
+                        }
+
+                    );
+
+
+                    list.appendChild(
+                        li
+                    );
 
                 }
 
             );
 
-            setupDrag(
-
-                card,
-
-                exerciseIndex
-
-            );
-
-            exerciseList.appendChild(
-                card
-            );
-
         }
 
-    );
 
-}
+        /* =========================
+           PESO
+        ========================= */
 
-/* =========================
-   ARRASTAR EXERCÍCIOS
-========================= */
+        function changeWeight(
 
-let draggedIndex =
-    null;
+            day,
+            index,
+            amount
 
-function setupDrag(
+        ) {
 
-    card,
+            let current =
+                parseFloat(
+                    db[day][index].weight
+                )
+                ||
+                0;
 
-    index
 
-) {
+            current +=
+                amount;
 
-    const handle =
-
-        card.querySelector(
-
-            ".drag-handle"
-
-        );
-
-    handle.addEventListener(
-
-        "pointerdown",
-
-        event => {
-
-            event.preventDefault();
-
-            draggedIndex =
-                index;
-
-            card.classList.add(
-                "dragging"
-            );
-
-            handle.setPointerCapture(
-
-                event.pointerId
-
-            );
-
-        }
-
-    );
-
-    handle.addEventListener(
-
-        "pointermove",
-
-        event => {
 
             if (
-
-                draggedIndex ===
-                null
-
+                current < 0
             ) {
 
-                return;
+                current =
+                    0;
 
             }
 
-            const element =
 
-                document.elementFromPoint(
+            db[day][index].weight =
+                current;
 
-                    event.clientX,
 
-                    event.clientY
-
-                );
-
-            const target =
-
-                element
-
-                    ?
-
-                element.closest(
-
-                    ".exercise-card"
-
-                )
-
-                    :
-
-                null;
-
-            if (
-
-                target
-
-                &&
-
-                target !== card
-
-            ) {
-
-                const targetIndex =
-
-                    Number(
-
-                        target.dataset.index
-
-                    );
-
-                const exercises =
-
-                    db[
-
-                        daySelect.value
-
-                    ];
-
-                const moved =
-
-                    exercises.splice(
-
-                        draggedIndex,
-
-                        1
-
-                    )[0];
-
-                exercises.splice(
-
-                    targetIndex,
-
-                    0,
-
-                    moved
-
-                );
-
-                save();
-
-                draggedIndex =
-                    targetIndex;
-
-                render();
-
-            }
-
-        }
-
-    );
-
-    handle.addEventListener(
-
-        "pointerup",
-
-        () => {
-
-            draggedIndex =
-                null;
-
-            card.classList.remove(
-                "dragging"
+            registrarCarga(
+                day,
+                index,
+                current
             );
 
-        }
 
-    );
-
-    handle.addEventListener(
-
-        "pointercancel",
-
-        () => {
-
-            draggedIndex =
-                null;
-
-            card.classList.remove(
-                "dragging"
-            );
-
-        }
-
-    );
-
-}
-
-/* =========================
-   ADICIONAR EXERCÍCIO
-========================= */
-
-document
-
-    .getElementById(
-        "addExercise"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            db[
-
-                daySelect.value
-
-            ].push(
-
-                createExercise(
-
-                    "Novo Exercício",
-
-                    "Grupo muscular",
-
-                    3,
-
-                    0,
-
-                    10
-
-                )
-
-            );
-
-            save();
+            salvar();
 
             render();
 
         }
 
-    );
 
-/* =========================
-   TROCAR DIA
-========================= */
+        /* =========================
+           HISTÓRICO
+        ========================= */
 
-daySelect.addEventListener(
+        function registrarCarga(
 
-    "change",
+            day,
+            index,
+            weight
 
-    render
+        ) {
 
-);
+            const ex =
+                db[day][index];
 
-/* =========================
-   RESETAR DIA
-========================= */
-
-document
-
-    .getElementById(
-        "resetDay"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
 
             if (
-
-                confirm(
-
-                    "Desmarcar todas as séries deste dia?"
-
-                )
-
+                !ex.history
             ) {
 
-                db[
+                ex.history =
+                    [];
 
-                    daySelect.value
+            }
 
-                ].forEach(
 
-                    exercise => {
+            const today =
+                new Date()
+                    .toLocaleDateString(
+                        "pt-BR"
+                    );
 
-                        exercise.sets.forEach(
 
-                            set => {
+            const last =
+                ex.history[
+                    ex.history.length - 1
+                ];
 
-                                set.done =
-                                    false;
 
-                            }
+            if (
+                last
+                &&
+                last.date === today
+            ) {
 
-                        );
+                last.weight =
+                    weight;
+
+            }
+
+            else {
+
+                ex.history.push(
+
+                    {
+
+                        date:
+                            today,
+
+                        weight:
+                            weight
 
                     }
 
                 );
 
-                save();
+            }
+
+        }
+
+
+        /* =========================
+           ADICIONAR
+        ========================= */
+
+        function addExercise() {
+
+            const day =
+                document.getElementById(
+                    "daySelect"
+                ).value;
+
+
+            db[day].push(
+
+                {
+
+                    name:
+                        "Novo Exercício",
+
+                    sets:
+                        "3 séries x 10 repetições",
+
+                    weight:
+                        0,
+
+                    history:
+                        []
+
+                }
+
+            );
+
+
+            salvar();
+
+            render();
+
+            showToast(
+                "Exercício adicionado"
+            );
+
+        }
+
+
+        /* =========================
+           EXCLUIR
+        ========================= */
+
+        function deleteExercise(
+
+            day,
+            index
+
+        ) {
+
+            if (
+
+                confirm(
+                    "Deseja realmente excluir este exercício?"
+                )
+
+            ) {
+
+                db[day].splice(
+                    index,
+                    1
+                );
+
+                salvar();
 
                 render();
+
+                showToast(
+                    "Exercício excluído"
+                );
 
             }
 
         }
 
-    );
 
-/* =========================
-   TIMER
-========================= */
+        /* =========================
+           DRAG AND DROP
+        ========================= */
 
-let timerSeconds =
-    90;
+        function dragStart(e) {
 
-let timerInterval =
-    null;
+            dragStartIndex =
+                Number(
+                    this.dataset.index
+                );
 
-function openTimer() {
+            this.classList.add(
+                "dragging"
+            );
 
-    timerSeconds =
-        90;
+        }
 
-    updateTimer();
 
-    document
+        function dragOver(e) {
 
-        .getElementById(
-            "timer"
-        )
+            e.preventDefault();
 
-        .classList.add(
-            "active"
-        );
+        }
 
-}
 
-function updateTimer() {
+        function dragDrop(e) {
 
-    document
+            e.preventDefault();
 
-        .getElementById(
-            "timerValue"
-        )
+            const endIndex =
+                Number(
+                    this.dataset.index
+                );
 
-        .textContent =
-
-        timerSeconds;
-
-}
-
-document
-
-    .getElementById(
-        "startTimer"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
 
             if (
-
-                timerInterval
-
+                dragStartIndex === null
+                ||
+                dragStartIndex === endIndex
             ) {
 
                 return;
 
             }
 
-            timerInterval =
 
-                setInterval(
+            const day =
+                document.getElementById(
+                    "daySelect"
+                ).value;
 
-                    () => {
 
-                        timerSeconds--;
+            const moved =
+                db[day].splice(
 
-                        updateTimer();
+                    dragStartIndex,
 
-                        if (
+                    1
 
-                            timerSeconds <=
-                            0
+                )[0];
 
-                        ) {
 
-                            clearInterval(
+            db[day].splice(
 
-                                timerInterval
+                endIndex,
 
-                            );
+                0,
 
-                            timerInterval =
-                                null;
+                moved
 
-                            if (
-
-                                navigator.vibrate
-
-                            ) {
-
-                                navigator.vibrate(
-
-                                    [
-
-                                        300,
-
-                                        150,
-
-                                        300
-
-                                    ]
-
-                                );
-
-                            }
-
-                        }
-
-                    },
-
-                    1000
-
-                );
-
-        }
-
-    );
-
-document
-
-    .getElementById(
-        "closeTimer"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            clearInterval(
-                timerInterval
             );
 
-            timerInterval =
+
+            dragStartIndex =
                 null;
 
-            document
 
-                .getElementById(
-                    "timer"
-                )
+            salvar();
 
-                .classList.remove(
-                    "active"
-                );
+            render();
 
         }
 
-    );
 
-/* =========================
-   MENU
-========================= */
+        /* =========================
+           DIA ATUAL
+        ========================= */
 
-document
+        function definirDiaHoje() {
 
-    .getElementById(
-        "menuButton"
-    )
+            const map = {
 
-    .addEventListener(
+                1:
+                    "Segunda-feira",
 
-        "click",
+                2:
+                    "Terça-feira",
 
-        () => {
+                3:
+                    "Quarta-feira",
 
-            document
+                4:
+                    "Quinta-feira",
 
-                .getElementById(
-                    "menuModal"
-                )
-
-                .classList.add(
-                    "active"
-                );
-
-        }
-
-    );
-
-document
-
-    .getElementById(
-        "closeMenu"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            document
-
-                .getElementById(
-                    "menuModal"
-                )
-
-                .classList.remove(
-                    "active"
-                );
-
-        }
-
-    );
-
-/* =========================
-   EXPORTAR BACKUP
-========================= */
-
-document
-
-    .getElementById(
-        "exportButton"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            const backup = {
-
-                treino:
-                    db,
-
-                historico:
-                    history,
-
-                data:
-
-                    new Date()
-                        .toISOString()
+                5:
+                    "Sexta-feira"
 
             };
 
-            const blob =
 
+            const day =
+                new Date()
+                    .getDay();
+
+
+            document.getElementById(
+                "daySelect"
+            ).value =
+                map[day]
+                ||
+                "Segunda-feira";
+
+        }
+
+
+        /* =========================
+           PROGRESSÃO
+        ========================= */
+
+        function openProgress() {
+
+            const section =
+                document.getElementById(
+                    "progressSection"
+                );
+
+
+            section.style.display =
+                "block";
+
+
+            populateProgressExercises();
+
+
+            section.scrollIntoView(
+
+                {
+
+                    behavior:
+                        "smooth"
+
+                }
+
+            );
+
+        }
+
+
+        function populateProgressExercises() {
+
+            const select =
+                document.getElementById(
+                    "progressExercise"
+                );
+
+
+            const day =
+                document.getElementById(
+                    "daySelect"
+                ).value;
+
+
+            select.innerHTML =
+                "";
+
+
+            db[day].forEach(
+
+                (ex, index) => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        index;
+
+
+                    option.textContent =
+                        ex.name;
+
+
+                    select.appendChild(
+                        option
+                    );
+
+                }
+
+            );
+
+
+            select.onchange =
+                drawChart;
+
+
+            drawChart();
+
+        }
+
+
+        function drawChart() {
+
+            const day =
+                document.getElementById(
+                    "daySelect"
+                ).value;
+
+
+            const index =
+                Number(
+                    document.getElementById(
+                        "progressExercise"
+                    ).value
+                );
+
+
+            const ex =
+                db[day][index];
+
+
+            const canvas =
+                document.getElementById(
+                    "progressChart"
+                );
+
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+
+            ctx.clearRect(
+
+                0,
+                0,
+                canvas.width,
+                canvas.height
+
+            );
+
+
+            const history =
+                ex.history
+                ||
+                [];
+
+
+            const values =
+                history.map(
+                    item =>
+                        Number(
+                            item.weight
+                        )
+                );
+
+
+            if (
+                values.length === 0
+            ) {
+
+                ctx.fillStyle =
+                    "#aaaaaa";
+
+
+                ctx.font =
+                    "16px Arial";
+
+
+                ctx.fillText(
+
+                    "Ainda não há histórico de cargas.",
+
+                    100,
+
+                    140
+
+                );
+
+
+                document.getElementById(
+                    "loadSuggestion"
+                ).innerHTML =
+
+                    "Registre algumas cargas para gerar uma sugestão.";
+
+                return;
+
+            }
+
+
+            const max =
+                Math.max(
+                    ...values
+                );
+
+
+            const min =
+                Math.min(
+                    ...values
+                );
+
+
+            const padding =
+                45;
+
+
+            ctx.strokeStyle =
+                "#555";
+
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                padding,
+                20
+            );
+
+            ctx.lineTo(
+                padding,
+                260
+            );
+
+            ctx.lineTo(
+                580,
+                260
+            );
+
+            ctx.stroke();
+
+
+            ctx.strokeStyle =
+                "#ff3333";
+
+
+            ctx.lineWidth =
+                3;
+
+
+            ctx.beginPath();
+
+
+            values.forEach(
+
+                (value, i) => {
+
+                    const x =
+                        padding
+                        +
+                        (
+                            i
+                            /
+                            Math.max(
+                                values.length - 1,
+                                1
+                            )
+                        )
+                        *
+                        520;
+
+
+                    const range =
+                        max - min
+                        ||
+                        1;
+
+
+                    const y =
+                        240
+                        -
+                        (
+                            (
+                                value - min
+                            )
+                            /
+                            range
+                        )
+                        *
+                        190;
+
+
+                    if (
+                        i === 0
+                    ) {
+
+                        ctx.moveTo(
+                            x,
+                            y
+                        );
+
+                    }
+
+                    else {
+
+                        ctx.lineTo(
+                            x,
+                            y
+                        );
+
+                    }
+
+                }
+
+            );
+
+
+            ctx.stroke();
+
+
+            values.forEach(
+
+                (value, i) => {
+
+                    const x =
+                        padding
+                        +
+                        (
+                            i
+                            /
+                            Math.max(
+                                values.length - 1,
+                                1
+                            )
+                        )
+                        *
+                        520;
+
+
+                    const range =
+                        max - min
+                        ||
+                        1;
+
+
+                    const y =
+                        240
+                        -
+                        (
+                            (
+                                value - min
+                            )
+                            /
+                            range
+                        )
+                        *
+                        190;
+
+
+                    ctx.fillStyle =
+                        "#ff3333";
+
+
+                    ctx.beginPath();
+
+                    ctx.arc(
+                        x,
+                        y,
+                        5,
+                        0,
+                        Math.PI * 2
+                    );
+
+                    ctx.fill();
+
+
+                    ctx.fillStyle =
+                        "#ffffff";
+
+
+                    ctx.font =
+                        "12px Arial";
+
+
+                    ctx.fillText(
+
+                        value + "kg",
+
+                        x - 15,
+
+                        y - 10
+
+                    );
+
+                }
+
+            );
+
+
+            const last =
+                values[
+                    values.length - 1
+                ];
+
+
+            let suggestion =
+                last;
+
+
+            if (
+                values.length >= 2
+            ) {
+
+                const previous =
+                    values[
+                        values.length - 2
+                    ];
+
+
+                if (
+                    last > previous
+                ) {
+
+                    suggestion =
+                        last + 1;
+
+                }
+
+                else {
+
+                    suggestion =
+                        last;
+
+                }
+
+            }
+
+
+            document.getElementById(
+                "loadSuggestion"
+            ).innerHTML = `
+
+                💡 Próxima sugestão:
+
+                <strong>
+                    ${suggestion} kg
+                </strong>
+
+                <br>
+
+                Baseado na sua última carga registrada.
+
+            `;
+
+        }
+
+
+        /* =========================
+           EXPORTAR
+        ========================= */
+
+        function exportData() {
+
+            const blob =
                 new Blob(
 
                     [
 
                         JSON.stringify(
-
-                            backup,
-
+                            db,
                             null,
-
                             2
-
                         )
 
                     ],
@@ -3974,266 +3115,385 @@ document
 
                 );
 
-            const url =
 
+            const url =
                 URL.createObjectURL(
                     blob
                 );
 
-            const link =
 
+            const a =
                 document.createElement(
                     "a"
                 );
 
-            link.href =
+
+            a.href =
                 url;
 
-            link.download =
 
-                "backup-meu-treino-v6.json";
+            a.download =
+                "meu-treino-backup.json";
 
-            link.click();
+
+            a.click();
+
 
             URL.revokeObjectURL(
                 url
             );
 
-        }
 
-    );
-
-/* =========================
-   IMPORTAR BACKUP
-========================= */
-
-document
-
-    .getElementById(
-        "importButton"
-    )
-
-    .addEventListener(
-
-        "click",
-
-        () => {
-
-            document
-
-                .getElementById(
-                    "fileInput"
-                )
-
-                .click();
+            showToast(
+                "Backup exportado"
+            );
 
         }
 
-    );
 
-document
+        /* =========================
+           IMPORTAR
+        ========================= */
 
-    .getElementById(
-        "fileInput"
-    )
+        document.getElementById(
+            "importFile"
+        ).addEventListener(
 
-    .addEventListener(
+            "change",
 
-        "change",
+            function () {
 
-        event => {
+                const file =
+                    this.files[0];
 
-            const file =
-                event.target.files[0];
+
+                if (
+                    !file
+                ) {
+
+                    return;
+
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function (event) {
+
+                        try {
+
+                            const imported =
+                                JSON.parse(
+                                    event.target.result
+                                );
+
+
+                            db =
+                                imported;
+
+
+                            salvar();
+
+                            render();
+
+                            showToast(
+                                "Backup importado"
+                            );
+
+                        }
+
+                        catch {
+
+                            alert(
+                                "Arquivo de backup inválido."
+                            );
+
+                        }
+
+                    };
+
+
+                reader.readAsText(
+                    file
+                );
+
+            }
+
+        );
+
+
+        /* =========================
+           RESTAURAR
+        ========================= */
+
+        function resetData() {
 
             if (
-                !file
+
+                confirm(
+
+                    "Isso apagará suas alterações locais e restaurará o treino original. Continuar?"
+
+                )
+
             ) {
+
+                db =
+                    structuredClone(
+                        dbPadrao
+                    );
+
+
+                salvar();
+
+                render();
+
+                showToast(
+                    "Treino restaurado"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           INSTALAÇÃO PWA
+        ========================= */
+
+        window.addEventListener(
+
+            "beforeinstallprompt",
+
+            event => {
+
+                event.preventDefault();
+
+                deferredPrompt =
+                    event;
+
+
+                if (
+
+                    !localStorage.getItem(
+                        "installPromptShown"
+                    )
+
+                ) {
+
+                    setTimeout(
+
+                        () => {
+
+                            document
+                                .getElementById(
+                                    "installModal"
+                                )
+                                .classList.add(
+                                    "active"
+                                );
+
+
+                            localStorage.setItem(
+
+                                "installPromptShown",
+
+                                "true"
+
+                            );
+
+                        },
+
+                        3000
+
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        async function installApp() {
+
+            if (
+                !deferredPrompt
+            ) {
+
+                closeInstallModal();
+
+                showToast(
+
+                    "Use o menu do navegador para instalar o app."
+
+                );
 
                 return;
 
             }
 
-            const reader =
-                new FileReader();
 
-            reader.onload =
+            deferredPrompt.prompt();
 
-                event => {
 
-                    try {
+            await deferredPrompt.userChoice;
 
-                        const backup =
 
-                            JSON.parse(
+            deferredPrompt =
+                null;
 
-                                event.target.result
 
-                            );
+            closeInstallModal();
 
-                        if (
+        }
 
-                            backup.treino
 
-                        ) {
+        function closeInstallModal() {
 
-                            db =
-                                backup.treino;
+            document
+                .getElementById(
+                    "installModal"
+                )
+                .classList.remove(
+                    "active"
+                );
 
-                        }
+        }
 
-                        if (
 
-                            backup.historico
+        /* =========================
+           SERVICE WORKER
+        ========================= */
 
-                        ) {
+        if (
+            "serviceWorker"
+            in navigator
+        ) {
 
-                            history =
-                                backup.historico;
+            window.addEventListener(
 
-                        }
+                "load",
 
-                        save();
+                () => {
 
-                        render();
+                    navigator.serviceWorker.register(
+                        "sw.js"
+                    );
 
-                        alert(
+                }
 
-                            "Backup importado com sucesso!"
-
-                        );
-
-                    }
-
-                    catch {
-
-                        alert(
-
-                            "Backup inválido."
-
-                        );
-
-                    }
-
-                };
-
-            reader.readAsText(
-                file
             );
 
         }
 
-    );
 
-/* =========================
-   DIA AUTOMÁTICO
-========================= */
+        /* =========================
+           INICIALIZAÇÃO
+        ========================= */
 
-function definirDiaDeHoje() {
+        document.getElementById(
+            "daySelect"
+        ).addEventListener(
 
-    const mapa = {
+            "change",
 
-        1:
-            "Segunda-feira",
+            () => {
 
-        2:
-            "Terça-feira",
+                render();
 
-        3:
-            "Quarta-feira",
+            }
 
-        4:
-            "Quinta-feira",
+        );
 
-        5:
-            "Sexta-feira"
 
-    };
+        definirDiaHoje();
 
-    const hoje =
-        new Date().getDay();
 
-    daySelect.value =
+        render();
 
-        mapa[hoje]
 
-        ||
+        /* =========================
+           SPLASH SEGURO
+        ========================= */
 
-        "Segunda-feira";
+        window.addEventListener(
 
-}
+            "load",
 
-/* =========================
-   INICIALIZAÇÃO
-========================= */
+            () => {
 
-definirDiaDeHoje();
+                setTimeout(
 
-render();
+                    () => {
 
-window.addEventListener(
+                        const splash =
+                            document.getElementById(
+                                "splashScreen"
+                            );
 
-    "load",
 
-    () => {
+                        if (
+                            splash
+                        ) {
+
+                            splash.classList.add(
+                                "hidden"
+                            );
+
+                        }
+
+                    },
+
+                    1800
+
+                );
+
+            }
+
+        );
+
+
+        /*
+
+        SEGURANÇA:
+
+        Se algum erro ocorrer durante
+        a inicialização, a splash screen
+        desaparece em no máximo 5 segundos.
+
+        */
 
         setTimeout(
 
             () => {
 
-                document
-
-                    .getElementById(
+                const splash =
+                    document.getElementById(
                         "splashScreen"
-                    )
+                    );
 
-                    .classList.add(
+
+                if (
+                    splash
+                ) {
+
+                    splash.classList.add(
                         "hidden"
                     );
 
+                }
+
             },
 
-            1800
+            5000
 
         );
 
-    }
-
-);
-
-/* =========================
-   SERVICE WORKER
-========================= */
-
-if (
-
-    "serviceWorker"
-
-    in
-
-    navigator
-
-) {
-
-    window.addEventListener(
-
-        "load",
-
-        () => {
-
-            navigator.serviceWorker.register(
-
-                "sw.js"
-
-            );
-
-        }
-
-    );
-
-}
-
-</script>
+    </script>
 
 </body>
 
