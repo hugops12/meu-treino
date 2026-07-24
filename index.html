@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no">
+
+    <meta name="theme-color"
+        content="#ff3333">
+
+    <meta name="description"
+        content="Meu aplicativo pessoal de treinamento">
+
+    <link rel="manifest"
+        href="manifest.json">
+
+    <title>Meu Treino V4</title>
+
+
+    <style>
+
+        :root {
+
+            --bg: #101010;
+
+            --card: #1d1d1d;
+
+            --card2: #252525;
+
+            --border: #303030;
+
+            --primary: #ff3333;
+
+            --primary-dark: #c92323;
+
+            --text: #ffffff;
+
+            --secondary: #a8a8a8;
+
+            --success: #35c759;
+
+            --warning: #ffb020;
+
+        }
+
+
+        * {
+
+            box-sizing: border-box;
+
+            -webkit-tap-highlight-color: transparent;
+
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 15px;
+
+            padding-bottom: 90px;
+
+            font-family:
+
+                -apple-system,
+
+                BlinkMacSystemFont,
+
+                "Segoe UI",
+
+                Roboto,
+
+                Arial,
+
+                sans-serif;
+
+            background:
+
+                linear-gradient(
+
+                    180deg,
+
+                    #101010,
+
+                    #181818
+
+                );
+
+            color: var(--text);
+
+        }
+
+
+        header {
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        h1 {
+
+            margin: 5px 0;
+
+            color: var(--primary);
+
+            font-size: 28px;
+
+        }
+
+
+        .subtitle {
+
+            color: var(--secondary);
+
+            font-size: 13px;
+
+        }
+
+
+        .top-controls {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        select {
+
+            flex: 1;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card);
+
+            color: var(--text);
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        .menu-button {
+
+            width: 50px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            background: var(--card);
+
+            color: white;
+
+            font-size: 22px;
+
+        }
+
+
+        .summary {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .summary-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .day-title {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+        }
+
+
+        .progress-label {
+
+            color: var(--secondary);
+
+            font-size: 13px;
+
+        }
+
+
+        .progress-bar {
+
+            height: 9px;
+
+            background: #333;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            background: var(--success);
+
+            transition: width 0.3s ease;
+
+        }
+
+
+        .exercise-card {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            margin-bottom: 15px;
+
+            padding: 15px;
+
+            box-shadow:
+
+                0 5px 12px rgba(0,0,0,0.25);
+
+        }
+
+
+        .exercise-card.completed {
+
+            border-color: var(--success);
+
+        }
+
+
+        .exercise-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .drag-handle {
+
+            font-size: 23px;
+
+            color: var(--secondary);
+
+            cursor: grab;
+
+        }
+
+
+        .exercise-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .exercise-name {
+
+            width: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        .exercise-description {
+
+            width: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: var(--secondary);
+
+            font-size: 13px;
+
+            margin-top: 5px;
+
+        }
+
+
+        .delete-button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #ff5555;
+
+            font-size: 19px;
+
+            padding: 5px;
+
+        }
+
+
+        .sets-header {
+
+            display: grid;
+
+            grid-template-columns:
+
+                40px
+
+                1fr
+
+                1fr
+
+                42px;
+
+            gap: 8px;
+
+            color: var(--secondary);
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+
+            text-align: center;
+
+        }
+
+
+        .set-row {
+
+            display: grid;
+
+            grid-template-columns:
+
+                40px
+
+                1fr
+
+                1fr
+
+                42px;
+
+            gap: 8px;
+
+            align-items: center;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .set-number {
+
+            text-align: center;
+
+            color: var(--secondary);
+
+            font-weight: bold;
+
+        }
+
+
+        .set-input {
+
+            width: 100%;
+
+            min-width: 0;
+
+            padding: 10px 5px;
+
+            text-align: center;
+
+            border-radius: 8px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card2);
+
+            color: white;
+
+            font-size: 16px;
+
+        }
+
+
+        .set-checkbox {
+
+            width: 25px;
+
+            height: 25px;
+
+            accent-color: var(--success);
+
+        }
+
+
+        .remove-set {
+
+            border: none;
+
+            background: transparent;
+
+            color: #ff5555;
+
+            font-size: 17px;
+
+        }
+
+
+        .exercise-actions {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 12px;
+
+        }
+
+
+        .action-button {
+
+            flex: 1;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card2);
+
+            color: var(--text);
+
+            font-size: 13px;
+
+        }
+
+
+        .action-button.primary {
+
+            border-color: var(--primary);
+
+            color: var(--primary);
+
+        }
+
+
+        .add-exercise {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            border: 2px dashed var(--primary);
+
+            background: transparent;
+
+            color: var(--primary);
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+        }
+
+
+        .bottom-bar {
+
+            position: fixed;
+
+            bottom: 0;
+
+            left: 0;
+
+            right: 0;
+
+            z-index: 20;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 10px 15px;
+
+            background: #181818;
+
+            border-top: 1px solid var(--border);
+
+        }
+
+
+        .bottom-bar button {
+
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            border: 1px solid var(--border);
+
+            background: transparent;
+
+            color: var(--secondary);
+
+        }
+
+
+        .timer {
+
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(0,0,0,0.85);
+
+            z-index: 100;
+
+        }
+
+
+        .timer.active {
+
+            display: flex;
+
+        }
+
+
+        .timer-box {
+
+            width: 85%;
+
+            max-width: 360px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .timer-title {
+
+            color: var(--secondary);
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .timer-value {
+
+            font-size: 58px;
+
+            font-weight: bold;
+
+            color: var(--primary);
+
+            margin: 15px 0;
+
+        }
+
+
+        .timer-buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .timer-buttons button {
+
+            flex: 1;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            border: none;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-weight: bold;
+
+        }
+
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.8);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 90;
+
+        }
+
+
+        .modal.active {
+
+            display: flex;
+
+        }
+
+
+        .modal-box {
+
+            width: 90%;
+
+            max-width: 400px;
+
+            background: var(--card);
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+        }
+
+
+        .modal-box h2 {
+
+            margin-top: 0;
+
+        }
+
+
+        .modal-button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 10px;
+
+            border-radius: 9px;
+
+            border: 1px solid var(--border);
+
+            background: var(--card2);
+
+            color: white;
+
+        }
+
+
+        @media (min-width: 700px) {
+
+            body {
+
+                max-width: 700px;
+
+                margin: auto;
+
+            }
+
+            .bottom-bar {
+
+                max-width: 700px;
+
+                margin: auto;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>Meu Treino</h1>
+
+    <div class="subtitle">
+
+        Controle seu treino, cargas e progresso
+
+    </div>
+
+</header>
+
+
+<div class="top-controls">
+
+    <select id="daySelect">
+
+        <option value="Segunda-feira">
+
+            Segunda-feira
+
+        </option>
+
+        <option value="Terça-feira">
+
+            Terça-feira
+
+        </option>
+
+        <option value="Quarta-feira">
+
+            Quarta-feira
+
+        </option>
+
+        <option value="Quinta-feira">
+
+            Quinta-feira
+
+        </option>
+
+        <option value="Sexta-feira">
+
+            Sexta-feira
+
+        </option>
+
+    </select>
+
+
+    <button
+
+        class="menu-button"
+
+        id="menuButton">
+
+        ⋮
+
+    </button>
+
+</div>
+
+
+<div class="summary">
+
+    <div class="summary-top">
+
+        <div
+
+            class="day-title"
+
+            id="dayTitle">
+
+        </div>
+
+
+        <div
+
+            class="progress-label"
+
+            id="progressLabel">
+
+        </div>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+        <div
+
+            class="progress-fill"
+
+            id="progressFill">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="exerciseList"></div>
+
+
+<button
+
+    class="add-exercise"
+
+    id="addExercise">
+
+    + Adicionar Exercício
+
+</button>
+
+
+<div class="bottom-bar">
+
+    <span
+
+        id="totalInfo">
+
+    </span>
+
+
+    <button
+
+        id="resetDay">
+
+        Resetar dia
+
+    </button>
+
+</div>
+
+
+<!-- TIMER -->
+
+<div
+
+    class="timer"
+
+    id="timer">
+
+
+    <div class="timer-box">
+
+        <div class="timer-title">
+
+            Descanso
+
+        </div>
+
+
+        <div
+
+            class="timer-value"
+
+            id="timerValue">
+
+            90
+
+        </div>
+
+
+        <div class="timer-buttons">
+
+            <button
+
+                id="startTimer">
+
+                Iniciar
+
+            </button>
+
+
+            <button
+
+                id="closeTimer">
+
+                Fechar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MENU -->
+
+<div
+
+    class="modal"
+
+    id="menuModal">
+
+
+    <div class="modal-box">
+
+        <h2>Opções</h2>
+
+
+        <button
+
+            class="modal-button"
+
+            id="exportButton">
+
+            Exportar backup
+
+        </button>
+
+
+        <button
+
+            class="modal-button"
+
+            id="importButton">
+
+            Importar backup
+
+        </button>
+
+
+        <input
+
+            type="file"
+
+            id="fileInput"
+
+            accept=".json"
+
+            hidden>
+
+
+        <button
+
+            class="modal-button"
+
+            id="closeMenu">
+
+            Fechar
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+const DB_KEY = "meuTreinoAppV4";
+
+
+const dbPadrao = {
+
+
+    "Segunda-feira": [
+
+        {
+
+            name: "Supino Reto Halter",
+
+            description: "Peito",
+
+            sets: [
+
+                { weight: 20, reps: 8, done: false },
+
+                { weight: 20, reps: 8, done: false },
+
+                { weight: 20, reps: 8, done: false },
+
+                { weight: 20, reps: 8, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Supino Inclinado Barra",
+
+            description: "Peito superior",
+
+            sets: [
+
+                { weight: 12.5, reps: 10, done: false },
+
+                { weight: 12.5, reps: 10, done: false },
+
+                { weight: 12.5, reps: 10, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Elevação Lateral Polia",
+
+            description: "Ombros",
+
+            sets: [
+
+                { weight: 5, reps: 12, done: false },
+
+                { weight: 5, reps: 12, done: false },
+
+                { weight: 5, reps: 12, done: false },
+
+                { weight: 5, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Tríceps Testa Barra W",
+
+            description: "Tríceps",
+
+            sets: [
+
+                { weight: 18, reps: 10, done: false },
+
+                { weight: 18, reps: 10, done: false },
+
+                { weight: 18, reps: 10, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Desenvolvimento Militar Barra",
+
+            description: "Ombros",
+
+            sets: [
+
+                { weight: 26, reps: 8, done: false },
+
+                { weight: 26, reps: 8, done: false },
+
+                { weight: 26, reps: 8, done: false },
+
+                { weight: 26, reps: 8, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Tríceps na Polia Coice",
+
+            description: "Tríceps",
+
+            sets: [
+
+                { weight: 10, reps: 12, done: false },
+
+                { weight: 10, reps: 12, done: false },
+
+                { weight: 10, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Abdominal Supra Banco Declinado",
+
+            description: "Abdômen",
+
+            sets: [
+
+                { weight: 0, reps: 15, done: false },
+
+                { weight: 0, reps: 15, done: false },
+
+                { weight: 0, reps: 15, done: false }
+
+            ]
+
+        }
+
+    ],
+
+
+    "Terça-feira": [
+
+        {
+
+            name: "Graviton",
+
+            description: "Costas",
+
+            sets: [
+
+                { weight: 33, reps: 12, done: false },
+
+                { weight: 33, reps: 12, done: false },
+
+                { weight: 33, reps: 12, done: false },
+
+                { weight: 33, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Remada Curvada com Barra",
+
+            description: "Costas",
+
+            sets: [
+
+                { weight: 46, reps: 8, done: false },
+
+                { weight: 46, reps: 8, done: false },
+
+                { weight: 46, reps: 8, done: false },
+
+                { weight: 46, reps: 8, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Puxada Alta Pegada Aberta",
+
+            description: "Costas",
+
+            sets: [
+
+                { weight: 68, reps: 10, done: false },
+
+                { weight: 68, reps: 10, done: false },
+
+                { weight: 68, reps: 10, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Face Pull na Polia",
+
+            description: "Ombros posteriores",
+
+            sets: [
+
+                { weight: 12.5, reps: 15, done: false },
+
+                { weight: 12.5, reps: 15, done: false },
+
+                { weight: 12.5, reps: 15, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Rosca Scott Máquina",
+
+            description: "Bíceps",
+
+            sets: [
+
+                { weight: 45, reps: 10, done: false },
+
+                { weight: 45, reps: 10, done: false },
+
+                { weight: 45, reps: 10, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Rosca Inversa na Polia",
+
+            description: "Antebraço",
+
+            sets: [
+
+                { weight: 12.5, reps: 12, done: false },
+
+                { weight: 12.5, reps: 12, done: false },
+
+                { weight: 12.5, reps: 12, done: false }
+
+            ]
+
+        }
+
+    ],
+
+
+    "Quarta-feira": [
+
+        {
+
+            name: "V-Squat",
+
+            description: "Quadríceps",
+
+            sets: [
+
+                { weight: 20, reps: 8, done: false },
+
+                { weight: 20, reps: 8, done: false },
+
+                { weight: 20, reps: 8, done: false },
+
+                { weight: 20, reps: 8, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Cadeira Adutora",
+
+            description: "Adutores",
+
+            sets: [
+
+                { weight: 110, reps: 15, done: false },
+
+                { weight: 110, reps: 15, done: false },
+
+                { weight: 110, reps: 15, done: false },
+
+                { weight: 110, reps: 15, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Cadeira Flexora",
+
+            description: "Posterior",
+
+            sets: [
+
+                { weight: 68, reps: 10, done: false },
+
+                { weight: 68, reps: 10, done: false },
+
+                { weight: 68, reps: 10, done: false },
+
+                { weight: 68, reps: 10, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Cadeira Extensora",
+
+            description: "Quadríceps",
+
+            sets: [
+
+                { weight: 75, reps: 12, done: false },
+
+                { weight: 75, reps: 12, done: false },
+
+                { weight: 75, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Panturrilha no Leg Press",
+
+            description: "Panturrilhas",
+
+            sets: [
+
+                { weight: 115, reps: 15, done: false },
+
+                { weight: 115, reps: 15, done: false },
+
+                { weight: 115, reps: 15, done: false },
+
+                { weight: 115, reps: 15, done: false }
+
+            ]
+
+        }
+
+    ],
+
+
+    "Quinta-feira": [
+
+        {
+
+            name: "Barra Fixa Supinada + Flexão",
+
+            description: "Costas e peito",
+
+            sets: [
+
+                { weight: 0, reps: 10, done: false },
+
+                { weight: 0, reps: 10, done: false },
+
+                { weight: 0, reps: 10, done: false },
+
+                { weight: 0, reps: 10, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Supino Inclinado com Halteres",
+
+            description: "Peito",
+
+            sets: [
+
+                { weight: 20, reps: 12, done: false },
+
+                { weight: 20, reps: 12, done: false },
+
+                { weight: 20, reps: 12, done: false },
+
+                { weight: 20, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Remada Unilateral Máquina",
+
+            description: "Costas",
+
+            sets: [
+
+                { weight: 80, reps: 12, done: false },
+
+                { weight: 80, reps: 12, done: false },
+
+                { weight: 80, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Desenvolvimento Halteres Uni",
+
+            description: "Ombros",
+
+            sets: [
+
+                { weight: 14, reps: 12, done: false },
+
+                { weight: 14, reps: 12, done: false },
+
+                { weight: 14, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Elevação Lateral + Crucifixo",
+
+            description: "Ombros e peito",
+
+            sets: [
+
+                { weight: 12, reps: 12, done: false },
+
+                { weight: 12, reps: 12, done: false },
+
+                { weight: 12, reps: 12, done: false }
+
+            ]
+
+        }
+
+    ],
+
+
+    "Sexta-feira": [
+
+        {
+
+            name: "Cadeira Abdutora",
+
+            description: "Glúteos",
+
+            sets: [
+
+                { weight: 89, reps: 15, done: false },
+
+                { weight: 89, reps: 15, done: false },
+
+                { weight: 89, reps: 15, done: false },
+
+                { weight: 89, reps: 15, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Afundo com Halteres",
+
+            description: "Pernas",
+
+            sets: [
+
+                { weight: 10, reps: 12, done: false },
+
+                { weight: 10, reps: 12, done: false },
+
+                { weight: 10, reps: 12, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Flexora Unilateral Máquina",
+
+            description: "Posterior",
+
+            sets: [
+
+                { weight: 20, reps: 15, done: false },
+
+                { weight: 20, reps: 15, done: false },
+
+                { weight: 20, reps: 15, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Cadeira Extensora Unilateral",
+
+            description: "Quadríceps",
+
+            sets: [
+
+                { weight: 25, reps: 15, done: false },
+
+                { weight: 25, reps: 15, done: false },
+
+                { weight: 25, reps: 15, done: false }
+
+            ]
+
+        },
+
+
+        {
+
+            name: "Panturrilha Sentado Máquina",
+
+            description: "Panturrilhas",
+
+            sets: [
+
+                { weight: 30, reps: 20, done: false },
+
+                { weight: 30, reps: 20, done: false },
+
+                { weight: 30, reps: 20, done: false },
+
+                { weight: 30, reps: 20, done: false }
+
+            ]
+
+        }
+
+    ]
+
+};
+
+
+let db =
+
+    JSON.parse(
+
+        localStorage.getItem(DB_KEY)
+
+    )
+
+    ||
+
+    structuredClone(dbPadrao);
+
+
+const daySelect =
+
+    document.getElementById(
+
+        "daySelect"
+
+    );
+
+
+const exerciseList =
+
+    document.getElementById(
+
+        "exerciseList"
+
+    );
+
+
+const dayTitle =
+
+    document.getElementById(
+
+        "dayTitle"
+
+    );
+
+
+const progressLabel =
+
+    document.getElementById(
+
+        "progressLabel"
+
+    );
+
+
+const progressFill =
+
+    document.getElementById(
+
+        "progressFill"
+
+    );
+
+
+const totalInfo =
+
+    document.getElementById(
+
+        "totalInfo"
+
+    );
+
+
+function save() {
+
+    localStorage.setItem(
+
+        DB_KEY,
+
+        JSON.stringify(db)
+
+    );
+
+}
+
+
+function render() {
+
+    const day =
+
+        daySelect.value;
+
+
+    const exercises =
+
+        db[day];
+
+
+    exerciseList.innerHTML = "";
+
+
+    dayTitle.textContent =
+
+        day;
+
+
+    let totalSets = 0;
+
+
+    let completedSets = 0;
+
+
+    exercises.forEach(
+
+        exercise => {
+
+
+            totalSets +=
+
+                exercise.sets.length;
+
+
+            completedSets +=
+
+                exercise.sets.filter(
+
+                    set => set.done
+
+                ).length;
+
+
+        }
+
+    );
+
+
+    const percentage =
+
+        totalSets === 0
+
+            ? 0
+
+            : Math.round(
+
+                completedSets /
+
+                totalSets *
+
+                100
+
+            );
+
+
+    progressLabel.textContent =
+
+        `${completedSets}/${totalSets} séries`;
+
+
+    progressFill.style.width =
+
+        `${percentage}%`;
+
+
+    totalInfo.textContent =
+
+        `${percentage}% concluído`;
+
+
+    exercises.forEach(
+
+        (exercise, exerciseIndex) => {
+
+
+            const card =
+
+                document.createElement(
+
+                    "div"
+
+                );
+
+
+            card.className =
+
+                "exercise-card";
+
+
+            const allDone =
+
+                exercise.sets.length > 0 &&
+
+                exercise.sets.every(
+
+                    set => set.done
+
+                );
+
+
+            if (allDone) {
+
+                card.classList.add(
+
+                    "completed"
+
+                );
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="exercise-header">
+
+                    <span class="drag-handle">
+
+                        ☰
+
+                    </span>
+
+
+                    <div class="exercise-info">
+
+                        <input
+
+                            class="exercise-name"
+
+                            value="${escapeHTML(exercise.name)}">
+
+
+                        <input
+
+                            class="exercise-description"
+
+                            value="${escapeHTML(exercise.description || "")}">
+
+                    </div>
+
+
+                    <button
+
+                        class="delete-button">
+
+                        🗑
+
+                    </button>
+
+                </div>
+
+
+                <div class="sets-header">
+
+                    <span>Série</span>
+
+                    <span>Carga kg</span>
+
+                    <span>Reps</span>
+
+                    <span>✓</span>
+
+                </div>
+
+
+                <div class="sets-container"></div>
+
+
+                <div class="exercise-actions">
+
+                    <button
+
+                        class="action-button primary add-set">
+
+                        + Série
+
+                    </button>
+
+
+                    <button
+
+                        class="action-button rest-button">
+
+                        ⏱ Descanso
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            const nameInput =
+
+                card.querySelector(
+
+                    ".exercise-name"
+
+                );
+
+
+            const descriptionInput =
+
+                card.querySelector(
+
+                    ".exercise-description"
+
+                );
+
+
+            nameInput.addEventListener(
+
+                "change",
+
+                () => {
+
+                    exercise.name =
+
+                        nameInput.value;
+
+                    save();
+
+                }
+
+            );
+
+
+            descriptionInput.addEventListener(
+
+                "change",
+
+                () => {
+
+                    exercise.description =
+
+                        descriptionInput.value;
+
+                    save();
+
+                }
+
+            );
+
+
+            const setsContainer =
+
+                card.querySelector(
+
+                    ".sets-container"
+
+                );
+
+
+            exercise.sets.forEach(
+
+                (set, setIndex) => {
+
+
+                    const row =
+
+                        document.createElement(
+
+                            "div"
+
+                        );
+
+
+                    row.className =
+
+                        "set-row";
+
+
+                    row.innerHTML = `
+
+                        <span
+
+                            class="set-number">
+
+                            ${setIndex + 1}
+
+                        </span>
+
+
+                        <input
+
+                            class="set-input weight"
+
+                            type="number"
+
+                            step="0.5"
+
+                            value="${set.weight}">
+
+
+                        <input
+
+                            class="set-input reps"
+
+                            type="number"
+
+                            value="${set.reps}">
+
+
+                        <input
+
+                            class="set-checkbox"
+
+                            type="checkbox"
+
+                            ${set.done ? "checked" : ""}>
+
+                    `;
+
+
+                    const weightInput =
+
+                        row.querySelector(
+
+                            ".weight"
+
+                        );
+
+
+                    const repsInput =
+
+                        row.querySelector(
+
+                            ".reps"
+
+                        );
+
+
+                    const checkbox =
+
+                        row.querySelector(
+
+                            ".set-checkbox"
+
+                        );
+
+
+                    weightInput.addEventListener(
+
+                        "change",
+
+                        () => {
+
+                            set.weight =
+
+                                Number(
+
+                                    weightInput.value
+
+                                )
+
+                                || 0;
+
+
+                            save();
+
+                        }
+
+                    );
+
+
+                    repsInput.addEventListener(
+
+                        "change",
+
+                        () => {
+
+                            set.reps =
+
+                                Number(
+
+                                    repsInput.value
+
+                                )
+
+                                || 0;
+
+
+                            save();
+
+                        }
+
+                    );
+
+
+                    checkbox.addEventListener(
+
+                        "change",
+
+                        () => {
+
+                            set.done =
+
+                                checkbox.checked;
+
+
+                            save();
+
+                            render();
+
+                        }
+
+                    );
+
+
+                    setsContainer.appendChild(
+
+                        row
+
+                    );
+
+                }
+
+            );
+
+
+            card.querySelector(
+
+                ".add-set"
+
+            ).addEventListener(
+
+                "click",
+
+                () => {
+
+
+                    const lastSet =
+
+                        exercise.sets[
+
+                            exercise.sets.length - 1
+
+                        ];
+
+
+                    exercise.sets.push({
+
+                        weight:
+
+                            lastSet
+
+                                ? lastSet.weight
+
+                                : 0,
+
+                        reps:
+
+                            lastSet
+
+                                ? lastSet.reps
+
+                                : 10,
+
+                        done: false
+
+                    });
+
+
+                    save();
+
+                    render();
+
+                }
+
+            );
+
+
+            card.querySelector(
+
+                ".rest-button"
+
+            ).addEventListener(
+
+                "click",
+
+                () => {
+
+                    openTimer();
+
+                }
+
+            );
+
+
+            card.querySelector(
+
+                ".delete-button"
+
+            ).addEventListener(
+
+                "click",
+
+                () => {
+
+                    if (
+
+                        confirm(
+
+                            "Excluir este exercício?"
+
+                        )
+
+                    ) {
+
+                        exercises.splice(
+
+                            exerciseIndex,
+
+                            1
+
+                        );
+
+                        save();
+
+                        render();
+
+                    }
+
+                }
+
+            );
+
+
+            exerciseList.appendChild(
+
+                card
+
+            );
+
+        }
+
+    );
+
+}
+
+
+document.getElementById(
+
+    "addExercise"
+
+).addEventListener(
+
+    "click",
+
+    () => {
+
+
+        db[daySelect.value].push({
+
+            name:
+
+                "Novo Exercício",
+
+            description:
+
+                "Grupo muscular",
+
+            sets: [
+
+                {
+
+                    weight: 0,
+
+                    reps: 10,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 0,
+
+                    reps: 10,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 0,
+
+                    reps: 10,
+
+                    done: false
+
+                }
+
+            ]
+
+        });
+
+
+        save();
+
+        render();
+
+    }
+
+);
+
+
+daySelect.addEventListener(
+
+    "change",
+
+    render
+
+);
+
+
+document.getElementById(
+
+    "resetDay"
+
+).addEventListener(
+
+    "click",
+
+    () => {
+
+
+        if (
+
+            confirm(
+
+                "Desmarcar todas as séries deste dia?"
+
+            )
+
+        ) {
+
+
+            db[daySelect.value].forEach(
+
+                exercise => {
+
+                    exercise.sets.forEach(
+
+                        set => {
+
+                            set.done = false;
+
+                        }
+
+                    );
+
+                }
+
+            );
+
+
+            save();
+
+            render();
+
+        }
+
+    }
+
+);
+
+
+let timerSeconds = 90;
+
+let timerInterval = null;
+
+
+function openTimer() {
+
+    timerSeconds = 90;
+
+    updateTimer();
+
+    document
+
+        .getElementById("timer")
+
+        .classList.add("active");
+
+}
+
+
+function updateTimer() {
+
+    document
+
+        .getElementById("timerValue")
+
+        .textContent =
+
+        timerSeconds;
+
+}
+
+
+document
+
+    .getElementById("startTimer")
+
+    .addEventListener(
+
+        "click",
+
+        () => {
+
+
+            if (timerInterval) {
+
+                return;
+
+            }
+
+
+            timerInterval =
+
+                setInterval(
+
+                    () => {
+
+
+                        timerSeconds--;
+
+                        updateTimer();
+
+
+                        if (
+
+                            timerSeconds <= 0
+
+                        ) {
+
+
+                            clearInterval(
+
+                                timerInterval
+
+                            );
+
+
+                            timerInterval =
+
+                                null;
+
+
+                            if (
+
+                                navigator.vibrate
+
+                            ) {
+
+                                navigator.vibrate(
+
+                                    [300, 150, 300]
+
+                                );
+
+                            }
+
+                        }
+
+                    },
+
+                    1000
+
+                );
+
+        }
+
+    );
+
+
+document
+
+    .getElementById("closeTimer")
+
+    .addEventListener(
+
+        "click",
+
+        () => {
+
+
+            clearInterval(
+
+                timerInterval
+
+            );
+
+
+            timerInterval =
+
+                null;
+
+
+            document
+
+                .getElementById("timer")
+
+                .classList.remove(
+
+                    "active"
+
+                );
+
+        }
+
+    );
+
+
+document
+
+    .getElementById("menuButton")
+
+    .addEventListener(
+
+        "click",
+
+        () => {
+
+
+            document
+
+                .getElementById("menuModal")
+
+                .classList.add(
+
+                    "active"
+
+                );
+
+        }
+
+    );
+
+
+document
+
+    .getElementById("closeMenu")
+
+    .addEventListener(
+
+        "click",
+
+        () => {
+
+
+            document
+
+                .getElementById("menuModal")
+
+                .classList.remove(
+
+                    "active"
+
+                );
+
+        }
+
+    );
+
+
+document
+
+    .getElementById("exportButton")
+
+    .addEventListener(
+
+        "click",
+
+        () => {
+
+
+            const data =
+
+                JSON.stringify(
+
+                    db,
+
+                    null,
+
+                    2
+
+                );
+
+
+            const blob =
+
+                new Blob(
+
+                    [data],
+
+                    {
+
+                        type:
+
+                            "application/json"
+
+                    }
+
+                );
+
+
+            const url =
+
+                URL.createObjectURL(
+
+                    blob
+
+                );
+
+
+            const link =
+
+                document.createElement(
+
+                    "a"
+
+                );
+
+
+            link.href =
+
+                url;
+
+
+            link.download =
+
+                "backup-meu-treino-v4.json";
+
+
+            link.click();
+
+
+            URL.revokeObjectURL(
+
+                url
+
+            );
+
+        }
+
+    );
+
+
+document
+
+    .getElementById("importButton")
+
+    .addEventListener(
+
+        "click",
+
+        () => {
+
+
+            document
+
+                .getElementById("fileInput")
+
+                .click();
+
+        }
+
+    );
+
+
+document
+
+    .getElementById("fileInput")
+
+    .addEventListener(
+
+        "change",
+
+        event => {
+
+
+            const file =
+
+                event.target.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            const reader =
+
+                new FileReader();
+
+
+            reader.onload =
+
+                event => {
+
+
+                    try {
+
+
+                        const importedData =
+
+                            JSON.parse(
+
+                                event.target.result
+
+                            );
+
+
+                        db =
+
+                            importedData;
+
+
+                        save();
+
+                        render();
+
+
+                        alert(
+
+                            "Backup importado com sucesso!"
+
+                        );
+
+
+                    }
+
+                    catch {
+
+                        alert(
+
+                            "Arquivo de backup inválido."
+
+                        );
+
+                    }
+
+                };
+
+
+            reader.readAsText(
+
+                file
+
+            );
+
+        }
+
+    );
+
+
+function escapeHTML(text) {
+
+    return String(text)
+
+        .replace(
+
+            /&/g,
+
+            "&amp;"
+
+        )
+
+        .replace(
+
+            /</g,
+
+            "&lt;"
+
+        )
+
+        .replace(
+
+            />/g,
+
+            "&gt;"
+
+        )
+
+        .replace(
+
+            /"/g,
+
+            "&quot;"
+
+        )
+
+        .replace(
+
+            /'/g,
+
+            "&#039;"
+
+        );
+
+}
+
+
+function definirDiaDeHoje() {
+
+
+    const mapa = {
+
+        1: "Segunda-feira",
+
+        2: "Terça-feira",
+
+        3: "Quarta-feira",
+
+        4: "Quinta-feira",
+
+        5: "Sexta-feira"
+
+    };
+
+
+    const hoje =
+
+        new Date().getDay();
+
+
+    daySelect.value =
+
+        mapa[hoje]
+
+        ||
+
+        "Segunda-feira";
+
+}
+
+
+definirDiaDeHoje();
+
+render();
+
+
+if (
+
+    "serviceWorker"
+
+    in navigator
+
+) {
+
+
+    window.addEventListener(
+
+        "load",
+
+        () => {
+
+
+            navigator.serviceWorker.register(
+
+                "sw.js"
+
+            );
+
+        }
+
+    );
+
+}
+
+
+</script>
+
+</body>
+
+</html>
