@@ -1,10 +1,21 @@
-const CACHE_NAME = "meu-treino-v4";
+const CACHE_NAME = "meu-treino-v41";
 
 const FILES_TO_CACHE = [
+
     "./",
+
     "./index.html",
+
     "./manifest.json",
-    "./sw.js"
+
+    "./sw.js",
+
+    "./splash.png",
+
+    "./icon-192.png",
+
+    "./icon-512.png"
+
 ];
 
 
@@ -14,15 +25,19 @@ self.addEventListener(
 
     event => {
 
+
         event.waitUntil(
 
             caches.open(
 
                 CACHE_NAME
 
-            ).then(
+            )
+
+            .then(
 
                 cache => {
+
 
                     return cache.addAll(
 
@@ -47,37 +62,41 @@ self.addEventListener(
 
     event => {
 
+
         event.waitUntil(
 
-            caches.keys().then(
+            caches.keys()
+
+            .then(
 
                 cacheNames => {
+
 
                     return Promise.all(
 
                         cacheNames
 
-                            .filter(
+                        .filter(
 
-                                name =>
+                            name =>
 
-                                    name !==
+                                name !==
 
-                                    CACHE_NAME
+                                CACHE_NAME
 
-                            )
+                        )
 
-                            .map(
+                        .map(
 
-                                name =>
+                            name =>
 
-                                    caches.delete(
+                                caches.delete(
 
-                                        name
+                                    name
 
-                                    )
+                                )
 
-                            )
+                        )
 
                     );
 
@@ -98,15 +117,19 @@ self.addEventListener(
 
     event => {
 
+
         event.respondWith(
 
             caches.match(
 
                 event.request
 
-            ).then(
+            )
+
+            .then(
 
                 response => {
+
 
                     return response
 

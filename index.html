@@ -12,15 +12,15 @@
         user-scalable=no">
 
     <meta name="theme-color"
-        content="#ff3333">
+        content="#101010">
 
     <meta name="description"
-        content="Meu aplicativo pessoal de treinamento">
+        content="Aplicativo pessoal de treinamento">
 
     <link rel="manifest"
         href="manifest.json">
 
-    <title>Meu Treino V4</title>
+    <title>Meu Treino</title>
 
 
     <style>
@@ -28,24 +28,13 @@
         :root {
 
             --bg: #101010;
-
             --card: #1d1d1d;
-
             --card2: #252525;
-
             --border: #303030;
-
             --primary: #ff3333;
-
-            --primary-dark: #c92323;
-
             --text: #ffffff;
-
             --secondary: #a8a8a8;
-
             --success: #35c759;
-
-            --warning: #ffb020;
 
         }
 
@@ -59,9 +48,19 @@
         }
 
 
+        html,
         body {
 
             margin: 0;
+
+            min-height: 100%;
+
+            background: var(--bg);
+
+        }
+
+
+        body {
 
             padding: 15px;
 
@@ -81,21 +80,201 @@
 
                 sans-serif;
 
+            color: var(--text);
+
+        }
+
+
+        /* =========================
+           TELA DE CARREGAMENTO
+        ========================= */
+
+
+        #splashScreen {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #101010;
+
+            overflow: hidden;
+
+            transition:
+
+                opacity 0.6s ease,
+
+                visibility 0.6s ease;
+
+        }
+
+
+        #splashScreen.hidden {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+        }
+
+
+        #splashScreen img {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .splash-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
             background:
 
                 linear-gradient(
 
                     180deg,
 
-                    #101010,
+                    rgba(0,0,0,0.25),
 
-                    #181818
+                    rgba(0,0,0,0.75)
 
                 );
 
-            color: var(--text);
+        }
+
+
+        .splash-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+            padding: 20px;
 
         }
+
+
+        .splash-title {
+
+            font-size: 38px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            color: white;
+
+            text-shadow:
+
+                0 0 15px rgba(255,51,51,0.7);
+
+        }
+
+
+        .splash-subtitle {
+
+            margin-top: 8px;
+
+            color: #ddd;
+
+            font-size: 14px;
+
+        }
+
+
+        .loading-dots {
+
+            margin-top: 25px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 8px;
+
+        }
+
+
+        .loading-dots span {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+
+            animation: pulse 1.2s infinite ease-in-out;
+
+        }
+
+
+        .loading-dots span:nth-child(2) {
+
+            animation-delay: 0.15s;
+
+        }
+
+
+        .loading-dots span:nth-child(3) {
+
+            animation-delay: 0.3s;
+
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+
+            80%,
+
+            100% {
+
+                opacity: 0.3;
+
+                transform: scale(0.8);
+
+            }
+
+            40% {
+
+                opacity: 1;
+
+                transform: scale(1.15);
+
+            }
+
+        }
+
+
+        /* =========================
+           APLICATIVO
+        ========================= */
 
 
         header {
@@ -293,8 +472,6 @@
 
             color: var(--secondary);
 
-            cursor: grab;
-
         }
 
 
@@ -455,19 +632,6 @@
         }
 
 
-        .remove-set {
-
-            border: none;
-
-            background: transparent;
-
-            color: #ff5555;
-
-            font-size: 17px;
-
-        }
-
-
         .exercise-actions {
 
             display: flex;
@@ -570,6 +734,11 @@
         }
 
 
+        /* =========================
+           TIMER
+        ========================= */
+
+
         .timer {
 
             position: fixed;
@@ -663,6 +832,11 @@
             font-weight: bold;
 
         }
+
+
+        /* =========================
+           MENU
+        ========================= */
 
 
         .modal {
@@ -760,9 +934,69 @@
 <body>
 
 
+<!-- =========================
+     SPLASH SCREEN
+========================= -->
+
+
+<div id="splashScreen">
+
+
+    <img
+
+        src="splash.png"
+
+        alt="Meu Treino">
+
+
+    <div class="splash-overlay"></div>
+
+
+    <div class="splash-content">
+
+
+        <div class="splash-title">
+
+            MEU TREINO
+
+        </div>
+
+
+        <div class="splash-subtitle">
+
+            Seu treino. Sua evolução.
+
+        </div>
+
+
+        <div class="loading-dots">
+
+            <span></span>
+
+            <span></span>
+
+            <span></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     APLICATIVO
+========================= -->
+
+
 <header>
 
-    <h1>Meu Treino</h1>
+    <h1>
+
+        Meu Treino
+
+    </h1>
+
 
     <div class="subtitle">
 
@@ -775,7 +1009,9 @@
 
 <div class="top-controls">
 
+
     <select id="daySelect">
+
 
         <option value="Segunda-feira">
 
@@ -783,11 +1019,13 @@
 
         </option>
 
+
         <option value="Terça-feira">
 
             Terça-feira
 
         </option>
+
 
         <option value="Quarta-feira">
 
@@ -795,17 +1033,20 @@
 
         </option>
 
+
         <option value="Quinta-feira">
 
             Quinta-feira
 
         </option>
 
+
         <option value="Sexta-feira">
 
             Sexta-feira
 
         </option>
+
 
     </select>
 
@@ -825,7 +1066,9 @@
 
 <div class="summary">
 
+
     <div class="summary-top">
+
 
         <div
 
@@ -848,6 +1091,7 @@
 
 
     <div class="progress-bar">
+
 
         <div
 
@@ -878,6 +1122,7 @@
 
 <div class="bottom-bar">
 
+
     <span
 
         id="totalInfo">
@@ -898,6 +1143,7 @@
 
 <!-- TIMER -->
 
+
 <div
 
     class="timer"
@@ -906,6 +1152,7 @@
 
 
     <div class="timer-box">
+
 
         <div class="timer-title">
 
@@ -926,6 +1173,7 @@
 
 
         <div class="timer-buttons">
+
 
             <button
 
@@ -953,6 +1201,7 @@
 
 <!-- MENU -->
 
+
 <div
 
     class="modal"
@@ -962,7 +1211,12 @@
 
     <div class="modal-box">
 
-        <h2>Opções</h2>
+
+        <h2>
+
+            Opções
+
+        </h2>
 
 
         <button
@@ -1016,7 +1270,9 @@
 <script>
 
 
-const DB_KEY = "meuTreinoAppV4";
+const DB_KEY =
+
+    "meuTreinoAppV41";
 
 
 const dbPadrao = {
@@ -1026,19 +1282,55 @@ const dbPadrao = {
 
         {
 
-            name: "Supino Reto Halter",
+            name:
 
-            description: "Peito",
+                "Supino Reto Halter",
+
+            description:
+
+                "Peito",
 
             sets: [
 
-                { weight: 20, reps: 8, done: false },
+                {
 
-                { weight: 20, reps: 8, done: false },
+                    weight: 20,
 
-                { weight: 20, reps: 8, done: false },
+                    reps: 8,
 
-                { weight: 20, reps: 8, done: false }
+                    done: false
+
+                },
+
+                {
+
+                    weight: 20,
+
+                    reps: 8,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 20,
+
+                    reps: 8,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 20,
+
+                    reps: 8,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1047,17 +1339,45 @@ const dbPadrao = {
 
         {
 
-            name: "Supino Inclinado Barra",
+            name:
 
-            description: "Peito superior",
+                "Supino Inclinado Barra",
+
+            description:
+
+                "Peito superior",
 
             sets: [
 
-                { weight: 12.5, reps: 10, done: false },
+                {
 
-                { weight: 12.5, reps: 10, done: false },
+                    weight: 12.5,
 
-                { weight: 12.5, reps: 10, done: false }
+                    reps: 10,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 12.5,
+
+                    reps: 10,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 12.5,
+
+                    reps: 10,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1066,19 +1386,55 @@ const dbPadrao = {
 
         {
 
-            name: "Elevação Lateral Polia",
+            name:
 
-            description: "Ombros",
+                "Elevação Lateral Polia",
+
+            description:
+
+                "Ombros",
 
             sets: [
 
-                { weight: 5, reps: 12, done: false },
+                {
 
-                { weight: 5, reps: 12, done: false },
+                    weight: 5,
 
-                { weight: 5, reps: 12, done: false },
+                    reps: 12,
 
-                { weight: 5, reps: 12, done: false }
+                    done: false
+
+                },
+
+                {
+
+                    weight: 5,
+
+                    reps: 12,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 5,
+
+                    reps: 12,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 5,
+
+                    reps: 12,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1087,17 +1443,45 @@ const dbPadrao = {
 
         {
 
-            name: "Tríceps Testa Barra W",
+            name:
 
-            description: "Tríceps",
+                "Tríceps Testa Barra W",
+
+            description:
+
+                "Tríceps",
 
             sets: [
 
-                { weight: 18, reps: 10, done: false },
+                {
 
-                { weight: 18, reps: 10, done: false },
+                    weight: 18,
 
-                { weight: 18, reps: 10, done: false }
+                    reps: 10,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 18,
+
+                    reps: 10,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 18,
+
+                    reps: 10,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1106,19 +1490,55 @@ const dbPadrao = {
 
         {
 
-            name: "Desenvolvimento Militar Barra",
+            name:
 
-            description: "Ombros",
+                "Desenvolvimento Militar Barra",
+
+            description:
+
+                "Ombros",
 
             sets: [
 
-                { weight: 26, reps: 8, done: false },
+                {
 
-                { weight: 26, reps: 8, done: false },
+                    weight: 26,
 
-                { weight: 26, reps: 8, done: false },
+                    reps: 8,
 
-                { weight: 26, reps: 8, done: false }
+                    done: false
+
+                },
+
+                {
+
+                    weight: 26,
+
+                    reps: 8,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 26,
+
+                    reps: 8,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 26,
+
+                    reps: 8,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1127,17 +1547,45 @@ const dbPadrao = {
 
         {
 
-            name: "Tríceps na Polia Coice",
+            name:
 
-            description: "Tríceps",
+                "Tríceps na Polia Coice",
+
+            description:
+
+                "Tríceps",
 
             sets: [
 
-                { weight: 10, reps: 12, done: false },
+                {
 
-                { weight: 10, reps: 12, done: false },
+                    weight: 10,
 
-                { weight: 10, reps: 12, done: false }
+                    reps: 12,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 10,
+
+                    reps: 12,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 10,
+
+                    reps: 12,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1146,17 +1594,45 @@ const dbPadrao = {
 
         {
 
-            name: "Abdominal Supra Banco Declinado",
+            name:
 
-            description: "Abdômen",
+                "Abdominal Supra Banco Declinado",
+
+            description:
+
+                "Abdômen",
 
             sets: [
 
-                { weight: 0, reps: 15, done: false },
+                {
 
-                { weight: 0, reps: 15, done: false },
+                    weight: 0,
 
-                { weight: 0, reps: 15, done: false }
+                    reps: 15,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 0,
+
+                    reps: 15,
+
+                    done: false
+
+                },
+
+                {
+
+                    weight: 0,
+
+                    reps: 15,
+
+                    done: false
+
+                }
 
             ]
 
@@ -1169,118 +1645,210 @@ const dbPadrao = {
 
         {
 
-            name: "Graviton",
+            name:
 
-            description: "Costas",
+                "Graviton",
 
-            sets: [
+            description:
 
-                { weight: 33, reps: 12, done: false },
+                "Costas",
 
-                { weight: 33, reps: 12, done: false },
+            sets:
 
-                { weight: 33, reps: 12, done: false },
+                Array.from(
 
-                { weight: 33, reps: 12, done: false }
+                    {
 
-            ]
+                        length: 4
 
-        },
+                    },
 
+                    () => ({
 
-        {
+                        weight: 33,
 
-            name: "Remada Curvada com Barra",
+                        reps: 12,
 
-            description: "Costas",
+                        done: false
 
-            sets: [
+                    })
 
-                { weight: 46, reps: 8, done: false },
-
-                { weight: 46, reps: 8, done: false },
-
-                { weight: 46, reps: 8, done: false },
-
-                { weight: 46, reps: 8, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Puxada Alta Pegada Aberta",
+            name:
 
-            description: "Costas",
+                "Remada Curvada com Barra",
 
-            sets: [
+            description:
 
-                { weight: 68, reps: 10, done: false },
+                "Costas",
 
-                { weight: 68, reps: 10, done: false },
+            sets:
 
-                { weight: 68, reps: 10, done: false }
+                Array.from(
 
-            ]
+                    {
 
-        },
+                        length: 4
 
+                    },
 
-        {
+                    () => ({
 
-            name: "Face Pull na Polia",
+                        weight: 46,
 
-            description: "Ombros posteriores",
+                        reps: 8,
 
-            sets: [
+                        done: false
 
-                { weight: 12.5, reps: 15, done: false },
+                    })
 
-                { weight: 12.5, reps: 15, done: false },
-
-                { weight: 12.5, reps: 15, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Rosca Scott Máquina",
+            name:
 
-            description: "Bíceps",
+                "Puxada Alta Pegada Aberta",
 
-            sets: [
+            description:
 
-                { weight: 45, reps: 10, done: false },
+                "Costas",
 
-                { weight: 45, reps: 10, done: false },
+            sets:
 
-                { weight: 45, reps: 10, done: false }
+                Array.from(
 
-            ]
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 68,
+
+                        reps: 10,
+
+                        done: false
+
+                    })
+
+                )
 
         },
 
 
         {
 
-            name: "Rosca Inversa na Polia",
+            name:
 
-            description: "Antebraço",
+                "Face Pull na Polia",
 
-            sets: [
+            description:
 
-                { weight: 12.5, reps: 12, done: false },
+                "Ombros posteriores",
 
-                { weight: 12.5, reps: 12, done: false },
+            sets:
 
-                { weight: 12.5, reps: 12, done: false }
+                Array.from(
 
-            ]
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 12.5,
+
+                        reps: 15,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Rosca Scott Máquina",
+
+            description:
+
+                "Bíceps",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 45,
+
+                        reps: 10,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Rosca Inversa na Polia",
+
+            description:
+
+                "Antebraço",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 12.5,
+
+                        reps: 12,
+
+                        done: false
+
+                    })
+
+                )
 
         }
 
@@ -1291,103 +1859,175 @@ const dbPadrao = {
 
         {
 
-            name: "V-Squat",
+            name:
 
-            description: "Quadríceps",
+                "V-Squat",
 
-            sets: [
+            description:
 
-                { weight: 20, reps: 8, done: false },
+                "Quadríceps",
 
-                { weight: 20, reps: 8, done: false },
+            sets:
 
-                { weight: 20, reps: 8, done: false },
+                Array.from(
 
-                { weight: 20, reps: 8, done: false }
+                    {
 
-            ]
+                        length: 4
 
-        },
+                    },
 
+                    () => ({
 
-        {
+                        weight: 20,
 
-            name: "Cadeira Adutora",
+                        reps: 8,
 
-            description: "Adutores",
+                        done: false
 
-            sets: [
+                    })
 
-                { weight: 110, reps: 15, done: false },
-
-                { weight: 110, reps: 15, done: false },
-
-                { weight: 110, reps: 15, done: false },
-
-                { weight: 110, reps: 15, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Cadeira Flexora",
+            name:
 
-            description: "Posterior",
+                "Cadeira Adutora",
 
-            sets: [
+            description:
 
-                { weight: 68, reps: 10, done: false },
+                "Adutores",
 
-                { weight: 68, reps: 10, done: false },
+            sets:
 
-                { weight: 68, reps: 10, done: false },
+                Array.from(
 
-                { weight: 68, reps: 10, done: false }
+                    {
 
-            ]
+                        length: 4
 
-        },
+                    },
 
+                    () => ({
 
-        {
+                        weight: 110,
 
-            name: "Cadeira Extensora",
+                        reps: 15,
 
-            description: "Quadríceps",
+                        done: false
 
-            sets: [
+                    })
 
-                { weight: 75, reps: 12, done: false },
-
-                { weight: 75, reps: 12, done: false },
-
-                { weight: 75, reps: 12, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Panturrilha no Leg Press",
+            name:
 
-            description: "Panturrilhas",
+                "Cadeira Flexora",
 
-            sets: [
+            description:
 
-                { weight: 115, reps: 15, done: false },
+                "Posterior",
 
-                { weight: 115, reps: 15, done: false },
+            sets:
 
-                { weight: 115, reps: 15, done: false },
+                Array.from(
 
-                { weight: 115, reps: 15, done: false }
+                    {
 
-            ]
+                        length: 4
+
+                    },
+
+                    () => ({
+
+                        weight: 68,
+
+                        reps: 10,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Cadeira Extensora",
+
+            description:
+
+                "Quadríceps",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 75,
+
+                        reps: 12,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Panturrilha no Leg Press",
+
+            description:
+
+                "Panturrilhas",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 4
+
+                    },
+
+                    () => ({
+
+                        weight: 115,
+
+                        reps: 15,
+
+                        done: false
+
+                    })
+
+                )
 
         }
 
@@ -1398,99 +2038,175 @@ const dbPadrao = {
 
         {
 
-            name: "Barra Fixa Supinada + Flexão",
+            name:
 
-            description: "Costas e peito",
+                "Barra Fixa Supinada + Flexão",
 
-            sets: [
+            description:
 
-                { weight: 0, reps: 10, done: false },
+                "Costas e peito",
 
-                { weight: 0, reps: 10, done: false },
+            sets:
 
-                { weight: 0, reps: 10, done: false },
+                Array.from(
 
-                { weight: 0, reps: 10, done: false }
+                    {
 
-            ]
+                        length: 4
 
-        },
+                    },
 
+                    () => ({
 
-        {
+                        weight: 0,
 
-            name: "Supino Inclinado com Halteres",
+                        reps: 10,
 
-            description: "Peito",
+                        done: false
 
-            sets: [
+                    })
 
-                { weight: 20, reps: 12, done: false },
-
-                { weight: 20, reps: 12, done: false },
-
-                { weight: 20, reps: 12, done: false },
-
-                { weight: 20, reps: 12, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Remada Unilateral Máquina",
+            name:
 
-            description: "Costas",
+                "Supino Inclinado com Halteres",
 
-            sets: [
+            description:
 
-                { weight: 80, reps: 12, done: false },
+                "Peito",
 
-                { weight: 80, reps: 12, done: false },
+            sets:
 
-                { weight: 80, reps: 12, done: false }
+                Array.from(
 
-            ]
+                    {
 
-        },
+                        length: 4
 
+                    },
 
-        {
+                    () => ({
 
-            name: "Desenvolvimento Halteres Uni",
+                        weight: 20,
 
-            description: "Ombros",
+                        reps: 12,
 
-            sets: [
+                        done: false
 
-                { weight: 14, reps: 12, done: false },
+                    })
 
-                { weight: 14, reps: 12, done: false },
-
-                { weight: 14, reps: 12, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Elevação Lateral + Crucifixo",
+            name:
 
-            description: "Ombros e peito",
+                "Remada Unilateral Máquina",
 
-            sets: [
+            description:
 
-                { weight: 12, reps: 12, done: false },
+                "Costas",
 
-                { weight: 12, reps: 12, done: false },
+            sets:
 
-                { weight: 12, reps: 12, done: false }
+                Array.from(
 
-            ]
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 80,
+
+                        reps: 12,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Desenvolvimento Halteres Uni",
+
+            description:
+
+                "Ombros",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 14,
+
+                        reps: 12,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Elevação Lateral + Crucifixo",
+
+            description:
+
+                "Ombros e peito",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 12,
+
+                        reps: 12,
+
+                        done: false
+
+                    })
+
+                )
 
         }
 
@@ -1501,99 +2217,175 @@ const dbPadrao = {
 
         {
 
-            name: "Cadeira Abdutora",
+            name:
 
-            description: "Glúteos",
+                "Cadeira Abdutora",
 
-            sets: [
+            description:
 
-                { weight: 89, reps: 15, done: false },
+                "Glúteos",
 
-                { weight: 89, reps: 15, done: false },
+            sets:
 
-                { weight: 89, reps: 15, done: false },
+                Array.from(
 
-                { weight: 89, reps: 15, done: false }
+                    {
 
-            ]
+                        length: 4
 
-        },
+                    },
 
+                    () => ({
 
-        {
+                        weight: 89,
 
-            name: "Afundo com Halteres",
+                        reps: 15,
 
-            description: "Pernas",
+                        done: false
 
-            sets: [
+                    })
 
-                { weight: 10, reps: 12, done: false },
-
-                { weight: 10, reps: 12, done: false },
-
-                { weight: 10, reps: 12, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Flexora Unilateral Máquina",
+            name:
 
-            description: "Posterior",
+                "Afundo com Halteres",
 
-            sets: [
+            description:
 
-                { weight: 20, reps: 15, done: false },
+                "Pernas",
 
-                { weight: 20, reps: 15, done: false },
+            sets:
 
-                { weight: 20, reps: 15, done: false }
+                Array.from(
 
-            ]
+                    {
 
-        },
+                        length: 3
 
+                    },
 
-        {
+                    () => ({
 
-            name: "Cadeira Extensora Unilateral",
+                        weight: 10,
 
-            description: "Quadríceps",
+                        reps: 12,
 
-            sets: [
+                        done: false
 
-                { weight: 25, reps: 15, done: false },
+                    })
 
-                { weight: 25, reps: 15, done: false },
-
-                { weight: 25, reps: 15, done: false }
-
-            ]
+                )
 
         },
 
 
         {
 
-            name: "Panturrilha Sentado Máquina",
+            name:
 
-            description: "Panturrilhas",
+                "Flexora Unilateral Máquina",
 
-            sets: [
+            description:
 
-                { weight: 30, reps: 20, done: false },
+                "Posterior",
 
-                { weight: 30, reps: 20, done: false },
+            sets:
 
-                { weight: 30, reps: 20, done: false },
+                Array.from(
 
-                { weight: 30, reps: 20, done: false }
+                    {
 
-            ]
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 20,
+
+                        reps: 15,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Cadeira Extensora Unilateral",
+
+            description:
+
+                "Quadríceps",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 3
+
+                    },
+
+                    () => ({
+
+                        weight: 25,
+
+                        reps: 15,
+
+                        done: false
+
+                    })
+
+                )
+
+        },
+
+
+        {
+
+            name:
+
+                "Panturrilha Sentado Máquina",
+
+            description:
+
+                "Panturrilhas",
+
+            sets:
+
+                Array.from(
+
+                    {
+
+                        length: 4
+
+                    },
+
+                    () => ({
+
+                        weight: 30,
+
+                        reps: 20,
+
+                        done: false
+
+                    })
+
+                )
 
         }
 
@@ -1606,13 +2398,21 @@ let db =
 
     JSON.parse(
 
-        localStorage.getItem(DB_KEY)
+        localStorage.getItem(
+
+            DB_KEY
+
+        )
 
     )
 
     ||
 
-    structuredClone(dbPadrao);
+    structuredClone(
+
+        dbPadrao
+
+    );
 
 
 const daySelect =
@@ -1675,14 +2475,70 @@ function save() {
 
         DB_KEY,
 
-        JSON.stringify(db)
+        JSON.stringify(
+
+            db
+
+        )
 
     );
 
 }
 
 
+function escapeHTML(text) {
+
+    return String(
+
+        text
+
+    )
+
+        .replace(
+
+            /&/g,
+
+            "&amp;"
+
+        )
+
+        .replace(
+
+            /</g,
+
+            "&lt;"
+
+        )
+
+        .replace(
+
+            />/g,
+
+            "&gt;"
+
+        )
+
+        .replace(
+
+            /"/g,
+
+            "&quot;"
+
+        )
+
+        .replace(
+
+            /'/g,
+
+            "&#039;"
+
+        );
+
+}
+
+
 function render() {
+
 
     const day =
 
@@ -1722,10 +2578,11 @@ function render() {
 
                 exercise.sets.filter(
 
-                    set => set.done
+                    set =>
+
+                        set.done
 
                 ).length;
-
 
         }
 
@@ -1766,7 +2623,13 @@ function render() {
 
     exercises.forEach(
 
-        (exercise, exerciseIndex) => {
+        (
+
+            exercise,
+
+            exerciseIndex
+
+        ) => {
 
 
             const card =
@@ -1789,12 +2652,18 @@ function render() {
 
                 exercise.sets.every(
 
-                    set => set.done
+                    set =>
+
+                        set.done
 
                 );
 
 
-            if (allDone) {
+            if (
+
+                allDone
+
+            ) {
 
                 card.classList.add(
 
@@ -1822,14 +2691,26 @@ function render() {
 
                             class="exercise-name"
 
-                            value="${escapeHTML(exercise.name)}">
+                            value="${escapeHTML(
+
+                                exercise.name
+
+                            )}">
 
 
                         <input
 
                             class="exercise-description"
 
-                            value="${escapeHTML(exercise.description || "")}">
+                            value="${escapeHTML(
+
+                                exercise.description
+
+                                ||
+
+                                ""
+
+                            )}">
 
                     </div>
 
@@ -1858,7 +2739,9 @@ function render() {
                 </div>
 
 
-                <div class="sets-container"></div>
+                <div class="sets-container">
+
+                </div>
 
 
                 <div class="exercise-actions">
@@ -1909,9 +2792,11 @@ function render() {
 
                 () => {
 
+
                     exercise.name =
 
                         nameInput.value;
+
 
                     save();
 
@@ -1926,9 +2811,11 @@ function render() {
 
                 () => {
 
+
                     exercise.description =
 
                         descriptionInput.value;
+
 
                     save();
 
@@ -1948,7 +2835,13 @@ function render() {
 
             exercise.sets.forEach(
 
-                (set, setIndex) => {
+                (
+
+                    set,
+
+                    setIndex
+
+                ) => {
 
 
                     const row =
@@ -1967,9 +2860,7 @@ function render() {
 
                     row.innerHTML = `
 
-                        <span
-
-                            class="set-number">
+                        <span class="set-number">
 
                             ${setIndex + 1}
 
@@ -2002,7 +2893,15 @@ function render() {
 
                             type="checkbox"
 
-                            ${set.done ? "checked" : ""}>
+                            ${
+
+                                set.done
+
+                                    ? "checked"
+
+                                    : ""
+
+                            }>
 
                     `;
 
@@ -2040,6 +2939,7 @@ function render() {
 
                         () => {
 
+
                             set.weight =
 
                                 Number(
@@ -2048,7 +2948,9 @@ function render() {
 
                                 )
 
-                                || 0;
+                                ||
+
+                                0;
 
 
                             save();
@@ -2064,6 +2966,7 @@ function render() {
 
                         () => {
 
+
                             set.reps =
 
                                 Number(
@@ -2072,7 +2975,9 @@ function render() {
 
                                 )
 
-                                || 0;
+                                ||
+
+                                0;
 
 
                             save();
@@ -2088,12 +2993,14 @@ function render() {
 
                         () => {
 
+
                             set.done =
 
                                 checkbox.checked;
 
 
                             save();
+
 
                             render();
 
@@ -2151,12 +3058,15 @@ function render() {
 
                                 : 10,
 
-                        done: false
+                        done:
+
+                            false
 
                     });
 
 
                     save();
+
 
                     render();
 
@@ -2173,11 +3083,7 @@ function render() {
 
                 "click",
 
-                () => {
-
-                    openTimer();
-
-                }
+                openTimer
 
             );
 
@@ -2192,6 +3098,7 @@ function render() {
 
                 () => {
 
+
                     if (
 
                         confirm(
@@ -2202,6 +3109,7 @@ function render() {
 
                     ) {
 
+
                         exercises.splice(
 
                             exerciseIndex,
@@ -2210,7 +3118,9 @@ function render() {
 
                         );
 
+
                         save();
+
 
                         render();
 
@@ -2234,71 +3144,76 @@ function render() {
 }
 
 
-document.getElementById(
+document
 
-    "addExercise"
+    .getElementById(
 
-).addEventListener(
+        "addExercise"
 
-    "click",
+    )
 
-    () => {
+    .addEventListener(
 
+        "click",
 
-        db[daySelect.value].push({
-
-            name:
-
-                "Novo Exercício",
-
-            description:
-
-                "Grupo muscular",
-
-            sets: [
-
-                {
-
-                    weight: 0,
-
-                    reps: 10,
-
-                    done: false
-
-                },
-
-                {
-
-                    weight: 0,
-
-                    reps: 10,
-
-                    done: false
-
-                },
-
-                {
-
-                    weight: 0,
-
-                    reps: 10,
-
-                    done: false
-
-                }
-
-            ]
-
-        });
+        () => {
 
 
-        save();
+            db[daySelect.value].push({
 
-        render();
+                name:
 
-    }
+                    "Novo Exercício",
 
-);
+                description:
+
+                    "Grupo muscular",
+
+                sets: [
+
+                    {
+
+                        weight: 0,
+
+                        reps: 10,
+
+                        done: false
+
+                    },
+
+                    {
+
+                        weight: 0,
+
+                        reps: 10,
+
+                        done: false
+
+                    },
+
+                    {
+
+                        weight: 0,
+
+                        reps: 10,
+
+                        done: false
+
+                    }
+
+                ]
+
+            });
+
+
+            save();
+
+
+            render();
+
+        }
+
+    );
 
 
 daySelect.addEventListener(
@@ -2310,56 +3225,68 @@ daySelect.addEventListener(
 );
 
 
-document.getElementById(
+document
 
-    "resetDay"
+    .getElementById(
 
-).addEventListener(
+        "resetDay"
 
-    "click",
+    )
 
-    () => {
+    .addEventListener(
 
+        "click",
 
-        if (
-
-            confirm(
-
-                "Desmarcar todas as séries deste dia?"
-
-            )
-
-        ) {
+        () => {
 
 
-            db[daySelect.value].forEach(
+            if (
 
-                exercise => {
+                confirm(
 
-                    exercise.sets.forEach(
+                    "Desmarcar todas as séries deste dia?"
 
-                        set => {
+                )
 
-                            set.done = false;
-
-                        }
-
-                    );
-
-                }
-
-            );
+            ) {
 
 
-            save();
+                db[daySelect.value].forEach(
 
-            render();
+                    exercise => {
+
+
+                        exercise.sets.forEach(
+
+                            set => {
+
+
+                                set.done =
+
+                                    false;
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+
+                save();
+
+
+                render();
+
+            }
 
         }
 
-    }
+    );
 
-);
+
+/* TIMER */
 
 
 let timerSeconds = 90;
@@ -2369,24 +3296,40 @@ let timerInterval = null;
 
 function openTimer() {
 
+
     timerSeconds = 90;
+
 
     updateTimer();
 
+
     document
 
-        .getElementById("timer")
+        .getElementById(
 
-        .classList.add("active");
+            "timer"
+
+        )
+
+        .classList.add(
+
+            "active"
+
+        );
 
 }
 
 
 function updateTimer() {
 
+
     document
 
-        .getElementById("timerValue")
+        .getElementById(
+
+            "timerValue"
+
+        )
 
         .textContent =
 
@@ -2397,7 +3340,11 @@ function updateTimer() {
 
 document
 
-    .getElementById("startTimer")
+    .getElementById(
+
+        "startTimer"
+
+    )
 
     .addEventListener(
 
@@ -2406,7 +3353,11 @@ document
         () => {
 
 
-            if (timerInterval) {
+            if (
+
+                timerInterval
+
+            ) {
 
                 return;
 
@@ -2421,6 +3372,7 @@ document
 
 
                         timerSeconds--;
+
 
                         updateTimer();
 
@@ -2450,9 +3402,18 @@ document
 
                             ) {
 
+
                                 navigator.vibrate(
 
-                                    [300, 150, 300]
+                                    [
+
+                                        300,
+
+                                        150,
+
+                                        300
+
+                                    ]
 
                                 );
 
@@ -2473,7 +3434,11 @@ document
 
 document
 
-    .getElementById("closeTimer")
+    .getElementById(
+
+        "closeTimer"
+
+    )
 
     .addEventListener(
 
@@ -2496,7 +3461,11 @@ document
 
             document
 
-                .getElementById("timer")
+                .getElementById(
+
+                    "timer"
+
+                )
 
                 .classList.remove(
 
@@ -2509,9 +3478,16 @@ document
     );
 
 
+/* MENU */
+
+
 document
 
-    .getElementById("menuButton")
+    .getElementById(
+
+        "menuButton"
+
+    )
 
     .addEventListener(
 
@@ -2522,7 +3498,11 @@ document
 
             document
 
-                .getElementById("menuModal")
+                .getElementById(
+
+                    "menuModal"
+
+                )
 
                 .classList.add(
 
@@ -2537,7 +3517,11 @@ document
 
 document
 
-    .getElementById("closeMenu")
+    .getElementById(
+
+        "closeMenu"
+
+    )
 
     .addEventListener(
 
@@ -2548,7 +3532,11 @@ document
 
             document
 
-                .getElementById("menuModal")
+                .getElementById(
+
+                    "menuModal"
+
+                )
 
                 .classList.remove(
 
@@ -2561,9 +3549,16 @@ document
     );
 
 
+/* EXPORTAR BACKUP */
+
+
 document
 
-    .getElementById("exportButton")
+    .getElementById(
+
+        "exportButton"
+
+    )
 
     .addEventListener(
 
@@ -2589,7 +3584,11 @@ document
 
                 new Blob(
 
-                    [data],
+                    [
+
+                        data
+
+                    ],
 
                     {
 
@@ -2627,7 +3626,7 @@ document
 
             link.download =
 
-                "backup-meu-treino-v4.json";
+                "backup-meu-treino.json";
 
 
             link.click();
@@ -2644,9 +3643,16 @@ document
     );
 
 
+/* IMPORTAR BACKUP */
+
+
 document
 
-    .getElementById("importButton")
+    .getElementById(
+
+        "importButton"
+
+    )
 
     .addEventListener(
 
@@ -2657,7 +3663,11 @@ document
 
             document
 
-                .getElementById("fileInput")
+                .getElementById(
+
+                    "fileInput"
+
+                )
 
                 .click();
 
@@ -2668,7 +3678,11 @@ document
 
 document
 
-    .getElementById("fileInput")
+    .getElementById(
+
+        "fileInput"
+
+    )
 
     .addEventListener(
 
@@ -2682,7 +3696,11 @@ document
                 event.target.files[0];
 
 
-            if (!file) {
+            if (
+
+                !file
+
+            ) {
 
                 return;
 
@@ -2718,6 +3736,7 @@ document
 
                         save();
 
+
                         render();
 
 
@@ -2731,6 +3750,7 @@ document
                     }
 
                     catch {
+
 
                         alert(
 
@@ -2754,51 +3774,7 @@ document
     );
 
 
-function escapeHTML(text) {
-
-    return String(text)
-
-        .replace(
-
-            /&/g,
-
-            "&amp;"
-
-        )
-
-        .replace(
-
-            /</g,
-
-            "&lt;"
-
-        )
-
-        .replace(
-
-            />/g,
-
-            "&gt;"
-
-        )
-
-        .replace(
-
-            /"/g,
-
-            "&quot;"
-
-        )
-
-        .replace(
-
-            /'/g,
-
-            "&#039;"
-
-        );
-
-}
+/* DIA AUTOMÁTICO */
 
 
 function definirDiaDeHoje() {
@@ -2806,15 +3782,30 @@ function definirDiaDeHoje() {
 
     const mapa = {
 
-        1: "Segunda-feira",
 
-        2: "Terça-feira",
+        1:
 
-        3: "Quarta-feira",
+            "Segunda-feira",
 
-        4: "Quinta-feira",
 
-        5: "Sexta-feira"
+        2:
+
+            "Terça-feira",
+
+
+        3:
+
+            "Quarta-feira",
+
+
+        4:
+
+            "Quinta-feira",
+
+
+        5:
+
+            "Sexta-feira"
 
     };
 
@@ -2835,9 +3826,57 @@ function definirDiaDeHoje() {
 }
 
 
+/* INICIALIZAÇÃO */
+
+
 definirDiaDeHoje();
 
+
 render();
+
+
+/* SPLASH SCREEN */
+
+
+window.addEventListener(
+
+    "load",
+
+    () => {
+
+
+        setTimeout(
+
+            () => {
+
+
+                document
+
+                    .getElementById(
+
+                        "splashScreen"
+
+                    )
+
+                    .classList.add(
+
+                        "hidden"
+
+                    );
+
+
+            },
+
+            1800
+
+        );
+
+    }
+
+);
+
+
+/* SERVICE WORKER */
 
 
 if (
@@ -2870,6 +3909,7 @@ if (
 
 
 </script>
+
 
 </body>
 
